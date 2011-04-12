@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 
 using VideoCapture2005;
+using System.IO;
 
 namespace barcodeReader
 {
@@ -23,7 +24,9 @@ namespace barcodeReader
         }
         public Bitmap AcquireImage()
         {
-            return new Bitmap("..\\barcodeExamples\\bitmap4.bmp");
+            string x = Directory.GetCurrentDirectory();
+
+            return new Bitmap("..\\..\\..\\barcodeExamples\\barcode3.bmp");
         }
     }
 }
