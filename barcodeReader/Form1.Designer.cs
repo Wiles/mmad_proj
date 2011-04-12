@@ -93,9 +93,8 @@
             this.tb_errors.AutoSize = true;
             this.tb_errors.Location = new System.Drawing.Point(142, 22);
             this.tb_errors.Name = "tb_errors";
-            this.tb_errors.Size = new System.Drawing.Size(35, 13);
+            this.tb_errors.Size = new System.Drawing.Size(0, 13);
             this.tb_errors.TabIndex = 4;
-            this.tb_errors.Text = "label1";
             // 
             // Form1
             // 
