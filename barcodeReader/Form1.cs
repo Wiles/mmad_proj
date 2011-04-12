@@ -13,6 +13,7 @@ namespace barcodeReader
     {
         Camera cam;
         System.Threading.Timer tim;
+        bool run = false;
 
         public Form1()
         {
@@ -22,7 +23,11 @@ namespace barcodeReader
 
         private void btn_run_Click(object sender, EventArgs e)
         {
-            tim = new System.Threading.Timer(new System.Threading.TimerCallback(imgCap), null, 0, 75); 
+            if (run == false)
+            {
+                tim = new System.Threading.Timer(new System.Threading.TimerCallback(imgCap), null, 0, 75);
+                run = true;
+            }
             //while (true)
             //{
             //    try
@@ -64,6 +69,17 @@ namespace barcodeReader
                 tb_errors.Text = ex.Message;
                 //MessageBox.Show("0");
             }
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            if (run)
+            {
+                tim.Dispose();
+                run = false;
+                pb_barcode.Image = null;
+            }
+
         }
     }
 }
