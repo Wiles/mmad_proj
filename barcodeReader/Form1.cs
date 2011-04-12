@@ -19,27 +19,29 @@ namespace barcodeReader
 
         private void btn_run_Click(object sender, EventArgs e)
         {
-            while (true)
-            {
-                try
-                {
-                    Bitmap curBarCode = cam.AcquireImage();
+            Bitmap curBarCode = cam.AcquireImage();
+            pb_barcode.Image = curBarCode;
+            //while (true)
+            //{
+            //    try
+            //    {
+            //        Bitmap curBarCode = cam.AcquireImage();
 
-                    pb_barcode.Image = Bitmapper.Resize(curBarCode, pb_barcode.Width, pb_barcode.Height);
-                    if( curBarCode != null )
-                    {
-                        string code = Barcode.DecodeImage(ref curBarCode);
-                        wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + code));
-                    }
-                }
-                catch(Exception ex)
-                {
-                    tb_errors.Text = ex.Message;
-                    //MessageBox.Show("0");
-                    continue;
-                }
-                break;
-            }
+            //        pb_barcode.Image = Bitmapper.Resize(curBarCode, pb_barcode.Width, pb_barcode.Height);
+            //        if( curBarCode != null )
+            //        {
+            //            string code = Barcode.DecodeImage(ref curBarCode);
+            //            wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + code));
+            //        }
+            //    }
+            //    catch(Exception ex)
+            //    {
+            //        tb_errors.Text = ex.Message;
+            //        //MessageBox.Show("0");
+            //        continue;
+            //    }
+            //    break;
+            //}
         }
     }
 }
