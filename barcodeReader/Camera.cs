@@ -11,22 +11,21 @@ namespace barcodeReader
 {
     class Camera
     {
-        vidcap2005 cap = null;
+        vidcap2005 cap;
+
         public Camera()
         {
-            /*
-            string s = "";
-
             cap = new vidcap2005();
-            cap.InitializeCapture(640, 480, 30, 0);
+            cap.InitializeCapture(640, 480, 15, 0);
             cap.ControlCapture(true);
-             */
         }
+
         public Bitmap AcquireImage()
         {
-            string x = Directory.GetCurrentDirectory();
-
-            return new Bitmap("..\\..\\..\\barcodeExamples\\barcode3.bmp");
+            //string x = Directory.GetCurrentDirectory();
+            //return new Bitmap("..\\..\\..\\barcodeExamples\\barcode3.bmp");
+            Bitmap bmp = cap.GetSnapshot();
+            return bmp;
         }
     }
 }
