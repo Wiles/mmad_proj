@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "barcodeReader", "barcodeReader\barcodeReader.csproj", "{10392E97-E7C3-4CF1-A467-94A4AA144314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vidcap2005", "vidcap2005\vidcap2005.csproj", "{6D6559A1-B9D1-426B-A525-BA1E91D89F76}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,20 +31,6 @@ Global
 		{10392E97-E7C3-4CF1-A467-94A4AA144314}.Release|x64.ActiveCfg = Release|x86
 		{10392E97-E7C3-4CF1-A467-94A4AA144314}.Release|x86.ActiveCfg = Release|x86
 		{10392E97-E7C3-4CF1-A467-94A4AA144314}.Release|x86.Build.0 = Release|x86
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Release|Win32.ActiveCfg = Release|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Release|x64.ActiveCfg = Release|Any CPU
-		{6D6559A1-B9D1-426B-A525-BA1E91D89F76}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
