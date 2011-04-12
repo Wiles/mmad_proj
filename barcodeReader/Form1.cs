@@ -11,30 +11,32 @@ namespace barcodeReader
 {
     public partial class Form1 : Form
     {
-        Camera cam = new Camera();
+        Camera cam;
+        System.Threading.Timer tim;
+
         public Form1()
         {
             InitializeComponent();
+            cam = new Camera();
         }
 
         private void btn_run_Click(object sender, EventArgs e)
         {
-            Bitmap curBarCode = cam.AcquireImage();
-            pb_barcode.Image = curBarCode;
+            tim = new System.Threading.Timer(new System.Threading.TimerCallback(imgCap), null, 0, 75); 
             //while (true)
             //{
             //    try
             //    {
             //        Bitmap curBarCode = cam.AcquireImage();
 
-            //        pb_barcode.Image = Bitmapper.Resize(curBarCode, pb_barcode.Width, pb_barcode.Height);
-            //        if( curBarCode != null )
+            //        pb_barcode.Image = curBarCode;
+            //        if (curBarCode != null)
             //        {
             //            string code = Barcode.DecodeImage(ref curBarCode);
             //            wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + code));
             //        }
             //    }
-            //    catch(Exception ex)
+            //    catch (Exception ex)
             //    {
             //        tb_errors.Text = ex.Message;
             //        //MessageBox.Show("0");
@@ -42,6 +44,26 @@ namespace barcodeReader
             //    }
             //    break;
             //}
+        }
+
+        private void imgCap(object o)
+        {
+            Bitmap curBarCode = cam.AcquireImage();
+            pb_barcode.Image = curBarCode;
+
+            try
+            {
+                if (curBarCode != null)
+                {
+                    //string code = Barcode.DecodeImage(ref curBarCode);
+                    //wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + code));
+                }
+            }
+            catch (Exception ex)
+            {
+                tb_errors.Text = ex.Message;
+                //MessageBox.Show("0");
+            }
         }
     }
 }

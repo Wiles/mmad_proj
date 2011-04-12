@@ -16,16 +16,16 @@ namespace barcodeReader
         public Camera()
         {
             cap = new vidcap2005();
-            cap.InitializeCapture(640, 480, 15, 0);
+            cap.InitializeCapture(320, 240, 15, 0);
             cap.ControlCapture(true);
         }
 
         public Bitmap AcquireImage()
         {
+
             //string x = Directory.GetCurrentDirectory();
             //return new Bitmap("..\\..\\..\\barcodeExamples\\barcode3.bmp");
-            Bitmap bmp = cap.GetSnapshot();
-            return bmp;
+            return cap.GetSnapshot();
         }
     }
 }
