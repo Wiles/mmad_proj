@@ -12,17 +12,17 @@ namespace barcodeReader
     class Barcode
     {
         static private Int32[] readRows = new Int32[4] { 20,40,60,80};
-        public static string DecodeImage(ref Bitmap Image)
+        public static string DecodeImage(Bitmap Image)
         {
             string barcode = "036000291452";
 
-            Bitmapper.ThresholdImage(ref Image, 196);
+            Bitmapper.ThresholdImage(Image, 196);
 
             Int32[] lineWidth = new Int32[59];
 
             foreach (Int32 rowNumber in readRows)
             {
-                Int32[] row = ReadLine(ref Image, rowNumber);
+                Int32[] row = ReadLine(Image, rowNumber);
                 Int32 offset = -1;
                 Int32 currentColor = row[0];
                 Int32 rowWidth = 0;
@@ -168,7 +168,7 @@ namespace barcodeReader
             return barcode;
         }
 
-        private static Int32[] ReadLine( ref Bitmap image, Int32 row )
+        private static Int32[] ReadLine( Bitmap image, Int32 row )
         {
             Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
             System.Drawing.Imaging.BitmapData bmpData =

@@ -34,7 +34,7 @@
             this.wb_browser = new System.Windows.Forms.WebBrowser();
             this.btn_run = new System.Windows.Forms.Button();
             this.tb_errors = new System.Windows.Forms.Label();
-            this.buttonStop = new System.Windows.Forms.Button();
+            this.btn_stop = new System.Windows.Forms.Button();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).BeginInit();
             this.SuspendLayout();
@@ -92,27 +92,27 @@
             // tb_errors
             // 
             this.tb_errors.AutoSize = true;
-            this.tb_errors.Location = new System.Drawing.Point(142, 22);
+            this.tb_errors.Location = new System.Drawing.Point(175, 18);
             this.tb_errors.Name = "tb_errors";
             this.tb_errors.Size = new System.Drawing.Size(0, 13);
             this.tb_errors.TabIndex = 4;
             // 
-            // buttonStop
+            // btn_stop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(94, 13);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(75, 23);
-            this.buttonStop.TabIndex = 5;
-            this.buttonStop.Text = "Stop";
-            this.buttonStop.UseVisualStyleBackColor = true;
-            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
+            this.btn_stop.Location = new System.Drawing.Point(94, 13);
+            this.btn_stop.Name = "btn_stop";
+            this.btn_stop.Size = new System.Drawing.Size(75, 23);
+            this.btn_stop.TabIndex = 5;
+            this.btn_stop.Text = "Stop";
+            this.btn_stop.UseVisualStyleBackColor = true;
+            this.btn_stop.Click += new System.EventHandler(this.btn_stop_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 529);
-            this.Controls.Add(this.buttonStop);
+            this.Controls.Add(this.btn_stop);
             this.Controls.Add(this.tb_errors);
             this.Controls.Add(this.btn_run);
             this.Controls.Add(this.wb_browser);
@@ -135,7 +135,7 @@
         private System.Windows.Forms.WebBrowser wb_browser;
         private System.Windows.Forms.Button btn_run;
         private System.Windows.Forms.Label tb_errors;
-        private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.Button btn_stop;
     }
 }
 

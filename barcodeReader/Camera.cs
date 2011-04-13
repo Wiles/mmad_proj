@@ -22,10 +22,7 @@ namespace barcodeReader
 
         public Bitmap AcquireImage()
         {
-
-            //string x = Directory.GetCurrentDirectory();
-            //return new Bitmap("..\\..\\..\\barcodeExamples\\barcode3.bmp");
-            return cap.GetSnapshot();
+            return new Bitmap(cap.GetSnapshot());
         }
     }
 }

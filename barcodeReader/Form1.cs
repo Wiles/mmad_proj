@@ -7,79 +7,91 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Threading;
+
 namespace barcodeReader
 {
     public partial class Form1 : Form
     {
         Camera cam;
-        System.Threading.Timer tim;
+        Mutex mu;
         bool run = false;
+        System.Threading.Timer tim = null;
+
+        public delegate void Capture();
+        public Capture cap;
 
         public Form1()
         {
             InitializeComponent();
             cam = new Camera();
+            mu = new Mutex();
+            cap = new Capture(imgCap);
         }
 
         private void btn_run_Click(object sender, EventArgs e)
         {
             if (run == false)
             {
-                tim = new System.Threading.Timer(new System.Threading.TimerCallback(imgCap), null, 0, 75);
+                tim = new System.Threading.Timer(new System.Threading.TimerCallback(imageEvent), null, 0, 100);
                 run = true;
+                btn_run.Enabled = false;
+                btn_stop.Enabled = true;
             }
-            //while (true)
-            //{
-            //    try
-            //    {
-            //        Bitmap curBarCode = cam.AcquireImage();
-
-            //        pb_barcode.Image = curBarCode;
-            //        if (curBarCode != null)
-            //        {
-            //            string code = Barcode.DecodeImage(ref curBarCode);
-            //            wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + code));
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        tb_errors.Text = ex.Message;
-            //        //MessageBox.Show("0");
-            //        continue;
-            //    }
-            //    break;
-            //}
         }
 
-        private void imgCap(object o)
+        private void imageEvent(object o)
         {
-            Bitmap curBarCode = cam.AcquireImage();
-            pb_barcode.Image = curBarCode;
+            this.Invoke(this.cap);
+        }
 
-            try
+        private void imgCap()
+        {
+            if (!run)
             {
-                if (curBarCode != null)
+                return;
+            }
+            if (mu.WaitOne(10))
+            {
+                try
                 {
-                    //string code = Barcode.DecodeImage(ref curBarCode);
-                    //wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + code));
+                    Bitmap curBarCode = (Bitmap)Bitmapper.Copy(cam.AcquireImage());
+                    pb_barcode.Image = Bitmapper.Copy(curBarCode);
+
+                    if (curBarCode != null)
+                    {
+                        string code = Barcode.DecodeImage(curBarCode);
+                        wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + code));
+                        run = false;
+
+                        btn_run.Enabled = true;
+                        btn_stop.Enabled = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    tb_errors.Text = ex.Message;
+                }
+                finally
+                {
+                    mu.ReleaseMutex();
                 }
             }
-            catch (Exception ex)
-            {
-                tb_errors.Text = ex.Message;
-                //MessageBox.Show("0");
-            }
         }
 
-        private void buttonStop_Click(object sender, EventArgs e)
+        private void btn_stop_Click(object sender, EventArgs e)
         {
             if (run)
             {
-                tim.Dispose();
+                if (tim != null)
+                {
+                    tim.Dispose();
+                }
                 run = false;
                 pb_barcode.Image = null;
+                btn_run.Enabled = true;
+                btn_stop.Enabled = false;
             }
-
         }
     }
 }
