@@ -18,7 +18,7 @@ namespace barcodeReader
         /// Converts a 24/32 bit bitmap to grayscale
         /// </summary>
         /// <param name="image">bitmap to convert</param>
-        static public void GrayscaleBitmap(ref Bitmap image)
+        static public void GrayscaleBitmap(Bitmap image)
         {
             const double ratioRed = 0.3;
             const double ratioGreen = 0.59;
@@ -41,10 +41,10 @@ namespace barcodeReader
             for (int i = 0; i < rgbValues.Length; i += sizeof(int))
             {
                 byte gray = (byte)(
-                                   (double)(rgbValues[i + greenOffset]) * ratioRed
-                                 + (double)(rgbValues[i + blueOffset]) * ratioBlue
-                                 + (double)(rgbValues[i + redOffset]) * ratioGreen
-                                 );
+                                    (double)(rgbValues[i + greenOffset]) * ratioRed
+                                    + (double)(rgbValues[i + blueOffset]) * ratioBlue
+                                    + (double)(rgbValues[i + redOffset]) * ratioGreen
+                                    );
 
                 rgbValues[i + greenOffset] = gray;
                 rgbValues[i + blueOffset] = gray;
@@ -60,13 +60,13 @@ namespace barcodeReader
         /// </summary>
         /// <param name="image">image to convert</param>
         /// <param name="threshold">Black/white luminosity level</param>
-        public static void ThresholdImage(ref Bitmap image, byte threshold)
+        public static void ThresholdImage(Bitmap image, byte threshold)
         {
             const byte black = 0xFF;
             const byte white = 0x00;
 
             //Grayscale image first to get luminousity
-            GrayscaleBitmap(ref image);
+            GrayscaleBitmap(image);
 
             Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
             System.Drawing.Imaging.BitmapData bmpData =
