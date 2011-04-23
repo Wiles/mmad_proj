@@ -61,6 +61,7 @@ namespace barcodeReader
                     pb_barcode.Image = Bitmapper.Resize(curBarCode, 320,240);
                     Bitmap temp = new Bitmap(pb_barcode.Image);
                     Bitmapper.ThresholdImage(temp, Barcode.threshold);
+                    pb_threshold.Image = temp;
 
                     if (curBarCode != null)
                     {
