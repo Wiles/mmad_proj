@@ -38,13 +38,16 @@
             this.nud_thres = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pb_barcode = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pb_barcode = new System.Windows.Forms.PictureBox();
+            this.pb_threshold = new System.Windows.Forms.PictureBox();
             this.gb_image.SuspendLayout();
+            this.gb_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_image
@@ -60,6 +63,7 @@
             // 
             // gb_data
             // 
+            this.gb_data.Controls.Add(this.pb_threshold);
             this.gb_data.Location = new System.Drawing.Point(350, 71);
             this.gb_data.Name = "gb_data";
             this.gb_data.Size = new System.Drawing.Size(335, 268);
@@ -161,14 +165,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data Lookup";
             // 
-            // pb_barcode
-            // 
-            this.pb_barcode.Location = new System.Drawing.Point(6, 19);
-            this.pb_barcode.Name = "pb_barcode";
-            this.pb_barcode.Size = new System.Drawing.Size(320, 240);
-            this.pb_barcode.TabIndex = 0;
-            this.pb_barcode.TabStop = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::barcodeReader.Properties.Resources.overlayImage;
@@ -177,6 +173,22 @@
             this.pictureBox1.Size = new System.Drawing.Size(160, 3);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // pb_barcode
+            // 
+            this.pb_barcode.Location = new System.Drawing.Point(6, 19);
+            this.pb_barcode.Name = "pb_barcode";
+            this.pb_barcode.Size = new System.Drawing.Size(320, 240);
+            this.pb_barcode.TabIndex = 0;
+            this.pb_barcode.TabStop = false;
+            // 
+            // pb_threshold
+            // 
+            this.pb_threshold.Location = new System.Drawing.Point(6, 19);
+            this.pb_threshold.Name = "pb_threshold";
+            this.pb_threshold.Size = new System.Drawing.Size(320, 240);
+            this.pb_threshold.TabIndex = 2;
+            this.pb_threshold.TabStop = false;
             // 
             // Form1
             // 
@@ -195,10 +207,12 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.gb_image.ResumeLayout(false);
+            this.gb_data.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +232,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pb_threshold;
     }
 }
 
