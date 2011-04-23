@@ -27,6 +27,7 @@ namespace barcodeReader
             cam = new Camera();
             mu = new Mutex();
             cap = new Capture(imgCap);
+            nud_thres.Value = Barcode.threshold;
         }
 
         private void btn_run_Click(object sender, EventArgs e)
@@ -56,7 +57,10 @@ namespace barcodeReader
                 try
                 {
                     Bitmap curBarCode = (Bitmap)cam.AcquireImage();
-                    pb_barcode.Image = Bitmapper.Copy(curBarCode);
+                    pb_barcode.Image = Bitmapper.Resize(curBarCode, 320,240);
+                    Bitmap temp = new Bitmap(pb_barcode.Image);
+                    Bitmapper.ThresholdImage(temp, Barcode.threshold);
+                    pb_threshold.Image = temp;
 
                     if (curBarCode != null)
                     {
@@ -92,6 +96,11 @@ namespace barcodeReader
                 btn_run.Enabled = true;
                 btn_stop.Enabled = false;
             }
+        }
+
+        private void nud_thres_ValueChanged(object sender, EventArgs e)
+        {
+            Barcode.threshold = (byte)nud_thres.Value;
         }
     }
 }
