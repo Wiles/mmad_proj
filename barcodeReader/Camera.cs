@@ -16,7 +16,7 @@ namespace barcodeReader
         public Camera()
         {
             cap = new vidcap2005();
-            cap.InitializeCapture(320, 240, 15, 0);
+            cap.InitializeCapture(640, 480, 15, 0);
             cap.ControlCapture(true);
         }
 

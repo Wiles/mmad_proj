@@ -33,7 +33,7 @@ namespace barcodeReader
         {
             if (run == false)
             {
-                tim = new System.Threading.Timer(new System.Threading.TimerCallback(imageEvent), null, 0, 100);
+                tim = new System.Threading.Timer(new System.Threading.TimerCallback(imageEvent), null, 0, 500);
                 run = true;
                 btn_run.Enabled = false;
                 btn_stop.Enabled = true;
@@ -55,7 +55,7 @@ namespace barcodeReader
             {
                 try
                 {
-                    Bitmap curBarCode = (Bitmap)Bitmapper.Copy(cam.AcquireImage());
+                    Bitmap curBarCode = (Bitmap)cam.AcquireImage();
                     pb_barcode.Image = Bitmapper.Copy(curBarCode);
 
                     if (curBarCode != null)
