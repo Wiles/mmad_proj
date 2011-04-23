@@ -31,29 +31,32 @@
             this.gb_image = new System.Windows.Forms.GroupBox();
             this.pb_barcode = new System.Windows.Forms.PictureBox();
             this.gb_data = new System.Windows.Forms.GroupBox();
+            this.pb_threshold = new System.Windows.Forms.PictureBox();
             this.wb_browser = new System.Windows.Forms.WebBrowser();
             this.btn_run = new System.Windows.Forms.Button();
             this.tb_errors = new System.Windows.Forms.Label();
             this.btn_stop = new System.Windows.Forms.Button();
-            this.pb_threshold = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.nud_thres = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).BeginInit();
             this.gb_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_image
             // 
             this.gb_image.Controls.Add(this.pb_barcode);
-            this.gb_image.Location = new System.Drawing.Point(12, 106);
+            this.gb_image.Location = new System.Drawing.Point(12, 71);
             this.gb_image.Name = "gb_image";
             this.gb_image.Size = new System.Drawing.Size(332, 268);
             this.gb_image.TabIndex = 0;
             this.gb_image.TabStop = false;
-            this.gb_image.Text = "Image";
+            this.gb_image.Text = "Raw";
             // 
             // pb_barcode
             // 
@@ -65,25 +68,31 @@
             // 
             // gb_data
             // 
-            this.gb_data.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gb_data.Controls.Add(this.pb_threshold);
-            this.gb_data.Location = new System.Drawing.Point(350, 106);
+            this.gb_data.Location = new System.Drawing.Point(350, 71);
             this.gb_data.Name = "gb_data";
-            this.gb_data.Size = new System.Drawing.Size(379, 268);
+            this.gb_data.Size = new System.Drawing.Size(335, 268);
             this.gb_data.TabIndex = 1;
             this.gb_data.TabStop = false;
-            this.gb_data.Text = "Data";
+            this.gb_data.Text = "Thresholded";
+            // 
+            // pb_threshold
+            // 
+            this.pb_threshold.Location = new System.Drawing.Point(6, 19);
+            this.pb_threshold.Name = "pb_threshold";
+            this.pb_threshold.Size = new System.Drawing.Size(320, 240);
+            this.pb_threshold.TabIndex = 1;
+            this.pb_threshold.TabStop = false;
             // 
             // wb_browser
             // 
             this.wb_browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.wb_browser.Location = new System.Drawing.Point(13, 380);
+            this.wb_browser.Location = new System.Drawing.Point(6, 19);
             this.wb_browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wb_browser.Name = "wb_browser";
-            this.wb_browser.Size = new System.Drawing.Size(717, 137);
+            this.wb_browser.Size = new System.Drawing.Size(658, 147);
             this.wb_browser.TabIndex = 2;
             // 
             // btn_run
@@ -99,14 +108,15 @@
             // tb_errors
             // 
             this.tb_errors.AutoSize = true;
-            this.tb_errors.Location = new System.Drawing.Point(175, 18);
+            this.tb_errors.Location = new System.Drawing.Point(156, 18);
             this.tb_errors.Name = "tb_errors";
-            this.tb_errors.Size = new System.Drawing.Size(0, 13);
+            this.tb_errors.Size = new System.Drawing.Size(33, 13);
             this.tb_errors.TabIndex = 4;
+            this.tb_errors.Text = "None";
             // 
             // btn_stop
             // 
-            this.btn_stop.Location = new System.Drawing.Point(94, 13);
+            this.btn_stop.Location = new System.Drawing.Point(12, 42);
             this.btn_stop.Name = "btn_stop";
             this.btn_stop.Size = new System.Drawing.Size(75, 23);
             this.btn_stop.TabIndex = 5;
@@ -114,18 +124,10 @@
             this.btn_stop.UseVisualStyleBackColor = true;
             this.btn_stop.Click += new System.EventHandler(this.btn_stop_Click);
             // 
-            // pb_threshold
-            // 
-            this.pb_threshold.Location = new System.Drawing.Point(6, 19);
-            this.pb_threshold.Name = "pb_threshold";
-            this.pb_threshold.Size = new System.Drawing.Size(320, 240);
-            this.pb_threshold.TabIndex = 1;
-            this.pb_threshold.TabStop = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 43);
+            this.label1.Location = new System.Drawing.Point(93, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 6;
@@ -133,7 +135,7 @@
             // 
             // nud_thres
             // 
-            this.nud_thres.Location = new System.Drawing.Point(75, 41);
+            this.nud_thres.Location = new System.Drawing.Point(156, 40);
             this.nud_thres.Maximum = new decimal(new int[] {
             255,
             0,
@@ -154,17 +156,40 @@
             0});
             this.nud_thres.ValueChanged += new System.EventHandler(this.nud_thres_ValueChanged);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(95, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Last Error:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.wb_browser);
+            this.groupBox1.Location = new System.Drawing.Point(12, 345);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(672, 172);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Data Lookup";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 529);
+            this.ClientSize = new System.Drawing.Size(703, 529);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.nud_thres);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_stop);
             this.Controls.Add(this.tb_errors);
             this.Controls.Add(this.btn_run);
-            this.Controls.Add(this.wb_browser);
             this.Controls.Add(this.gb_data);
             this.Controls.Add(this.gb_image);
             this.Name = "Form1";
@@ -174,6 +199,7 @@
             this.gb_data.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,6 +217,8 @@
         private System.Windows.Forms.PictureBox pb_threshold;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nud_thres;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
