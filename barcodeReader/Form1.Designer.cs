@@ -35,8 +35,14 @@
             this.btn_run = new System.Windows.Forms.Button();
             this.tb_errors = new System.Windows.Forms.Label();
             this.btn_stop = new System.Windows.Forms.Button();
+            this.pb_threshold = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nud_thres = new System.Windows.Forms.NumericUpDown();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).BeginInit();
+            this.gb_data.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_image
@@ -61,6 +67,7 @@
             // 
             this.gb_data.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_data.Controls.Add(this.pb_threshold);
             this.gb_data.Location = new System.Drawing.Point(350, 106);
             this.gb_data.Name = "gb_data";
             this.gb_data.Size = new System.Drawing.Size(379, 268);
@@ -107,11 +114,53 @@
             this.btn_stop.UseVisualStyleBackColor = true;
             this.btn_stop.Click += new System.EventHandler(this.btn_stop_Click);
             // 
+            // pb_threshold
+            // 
+            this.pb_threshold.Location = new System.Drawing.Point(6, 19);
+            this.pb_threshold.Name = "pb_threshold";
+            this.pb_threshold.Size = new System.Drawing.Size(320, 240);
+            this.pb_threshold.TabIndex = 1;
+            this.pb_threshold.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Threshold:";
+            // 
+            // nud_thres
+            // 
+            this.nud_thres.Location = new System.Drawing.Point(75, 41);
+            this.nud_thres.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nud_thres.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_thres.Name = "nud_thres";
+            this.nud_thres.Size = new System.Drawing.Size(54, 20);
+            this.nud_thres.TabIndex = 7;
+            this.nud_thres.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.nud_thres.ValueChanged += new System.EventHandler(this.nud_thres_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 529);
+            this.Controls.Add(this.nud_thres);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_stop);
             this.Controls.Add(this.tb_errors);
             this.Controls.Add(this.btn_run);
@@ -122,6 +171,9 @@
             this.Text = "Form1";
             this.gb_image.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).EndInit();
+            this.gb_data.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,6 +188,9 @@
         private System.Windows.Forms.Button btn_run;
         private System.Windows.Forms.Label tb_errors;
         private System.Windows.Forms.Button btn_stop;
+        private System.Windows.Forms.PictureBox pb_threshold;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nud_thres;
     }
 }
 

@@ -11,12 +11,13 @@ namespace barcodeReader
 {
     class Barcode
     {
+        static public byte threshold = 128;
         static private Int32 rowsToAverage = 20;
         public static string DecodeImage(Bitmap Image)
         {
             string barcode = "036000291452";
 
-            Bitmapper.ThresholdImage(Image, 196);
+            Bitmapper.ThresholdImage(Image, threshold);
 
             Double[] lineWidth = new Double[59];
 
@@ -92,7 +93,7 @@ namespace barcodeReader
 
             if (ValidateBarCode(barcode) == false)
             {
-                throw new ArgumentException("Invalid barcode.");
+                throw new ArgumentException("Invalid barcode: " + barcode);
             }
             return barcode;
         }
