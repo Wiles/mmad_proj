@@ -11,24 +11,26 @@ namespace barcodeReader
 {
     class Barcode
     {
-        static private Int32[] readRows = new Int32[4] { 20,40,60,80};
+        static private Int32 rowsToAverage = 20;
         public static string DecodeImage(Bitmap Image)
         {
             string barcode = "036000291452";
 
             Bitmapper.ThresholdImage(Image, 196);
 
-            Int32[] lineWidth = new Int32[59];
+            Double[] lineWidth = new Double[59];
 
-            foreach (Int32 rowNumber in readRows)
+            Int32 startRow = (Image.Height / 2) - (rowsToAverage / 2);
+
+            for (int i = 0; i < rowsToAverage; ++i )
             {
-                Int32[] row = ReadLine(Image, rowNumber);
+                Int32[] row = ReadLine(Image, startRow + i);
                 Int32 offset = -1;
                 Int32 currentColor = row[0];
                 Int32 rowWidth = 0;
-                for (int i = 0; i < row.Length; ++i)
+                for (int j = 0; j < row.Length; ++j)
                 {
-                    if (row[i] == currentColor)
+                    if (row[j] == currentColor)
                     {
                         ++rowWidth;
                         continue;
@@ -38,12 +40,12 @@ namespace barcodeReader
                         if (offset == -1)
                         {
                             ++offset;
-                            currentColor = row[i];
+                            currentColor = row[j];
                             rowWidth = 1;
                         }
                         else
                         {
-                            currentColor = row[i];
+                            currentColor = row[j];
                             lineWidth[offset] += rowWidth;
                             rowWidth = 1;
                             offset++;
@@ -59,24 +61,24 @@ namespace barcodeReader
             //Average out reads
             for (Int32 i = 0; i < lineWidth.Length; ++i )
             {
-                lineWidth[i] /= readRows.Length;
+                lineWidth[i] /= rowsToAverage;
             }
 
             //scale line thicknesses
-            Int32 thickness = (lineWidth[0] + lineWidth[1] + lineWidth[2]) / 3;
+            Double thickness = (lineWidth[0] + lineWidth[1] + lineWidth[2]) / 3;
 
             for (Int32 i = 0; i < lineWidth.Length; ++i)
             {
                 //This part is important gotta get scaling of the line thicknesses right.
-                if (lineWidth[i] <= (thickness + thickness/2 + 1))
+                if (lineWidth[i] < thickness*1.5)
                 {
                     lineWidth[i] = 1;
                 }
-                else if (lineWidth[i] <= ((thickness*2) + thickness / 2 + 1))
+                else if (lineWidth[i] < thickness * 2.5)
                 {
                     lineWidth[i] = 2;
                 }
-                else if (lineWidth[i] <= ((thickness * 3) + thickness / 2 + 1))
+                else if (lineWidth[i] < thickness * 3.5)
                 {
                     lineWidth[i] = 3;
                 }
@@ -95,7 +97,7 @@ namespace barcodeReader
             return barcode;
         }
 
-        private static string DecodeThicknesses( Int32[] lines )
+        private static string DecodeThicknesses( Double[] lines )
         {
             if( lines.Length != 59 )
             {
@@ -119,7 +121,7 @@ namespace barcodeReader
             }
 
             //remove checks
-            Int32[] numbers = new Int32[48];
+            Double[] numbers = new Double[48];
             Array.Copy(lines, 3, numbers, 0, 24);
             Array.Copy(lines, 32, numbers, 24, 24);
 
@@ -170,6 +172,7 @@ namespace barcodeReader
 
         private static Int32[] ReadLine( Bitmap image, Int32 row )
         {
+            /*
             Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
             System.Drawing.Imaging.BitmapData bmpData =
                 image.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite,
@@ -195,6 +198,14 @@ namespace barcodeReader
             image.UnlockBits(bmpData);
 
             return grayscaledRow;
+             */
+            Int32[] rowRead = new Int32[image.Width];
+            for (int i = 0; i < image.Width; ++i)
+            {
+                rowRead[i] = image.GetPixel(i, row).G;
+            }
+            return rowRead;
+
 
         }
 
