@@ -200,10 +200,11 @@ namespace barcodeReader
 
             return grayscaledRow;
              */
-            Int32[] rowRead = new Int32[image.Width];
-            for (int i = 0; i < image.Width; ++i)
+            Int32 quarterWidth = image.Width / 4;
+            Int32[] rowRead = new Int32[quarterWidth*2];
+            for (int i = quarterWidth; i < quarterWidth*3; ++i)
             {
-                rowRead[i] = image.GetPixel(i, row).G;
+                rowRead[i - quarterWidth] = image.GetPixel(i, row).G;
             }
             return rowRead;
 

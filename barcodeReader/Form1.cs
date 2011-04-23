@@ -13,10 +13,11 @@ namespace barcodeReader
 {
     public partial class Form1 : Form
     {
-        Camera cam;
-        Mutex mu;
-        bool run = false;
-        System.Threading.Timer tim = null;
+        private Int32 readDelay = 250;
+        private Camera cam;
+        private Mutex mu;
+        private bool run = false;
+        private System.Threading.Timer tim = null;
 
         public delegate void Capture();
         public Capture cap;
@@ -34,7 +35,7 @@ namespace barcodeReader
         {
             if (run == false)
             {
-                tim = new System.Threading.Timer(new System.Threading.TimerCallback(imageEvent), null, 0, 500);
+                tim = new System.Threading.Timer(new System.Threading.TimerCallback(imageEvent), null, 0, readDelay);
                 run = true;
                 btn_run.Enabled = false;
                 btn_stop.Enabled = true;
@@ -60,7 +61,6 @@ namespace barcodeReader
                     pb_barcode.Image = Bitmapper.Resize(curBarCode, 320,240);
                     Bitmap temp = new Bitmap(pb_barcode.Image);
                     Bitmapper.ThresholdImage(temp, Barcode.threshold);
-                    pb_threshold.Image = temp;
 
                     if (curBarCode != null)
                     {

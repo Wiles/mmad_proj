@@ -22,7 +22,8 @@ namespace barcodeReader
 
         public Bitmap AcquireImage()
         {
-            return new Bitmap(cap.GetSnapshot());
+            Bitmap image = (Bitmap)Bitmapper.Copy(new Bitmap(cap.GetSnapshot()));
+            return image;
         }
     }
 }
