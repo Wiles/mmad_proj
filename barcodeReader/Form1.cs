@@ -20,7 +20,9 @@ namespace barcodeReader
         private Camera cam;
         private Mutex mu;
         private bool run = false;
+        private Int32 source = 0;
         private System.Threading.Timer tim = null;
+        private string lastBarcode = "";
 
         private delegate void CaptureImage();
         private CaptureImage cap;
@@ -35,6 +37,10 @@ namespace barcodeReader
             mu = new Mutex();
             cap = new CaptureImage(imgCap);
             nud_thres.Value = Barcode.threshold;
+
+            cb_source.Items.Add("upcdatabase.com");
+            cb_source.Items.Add("searchupc.com");
+            cb_source.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -79,6 +85,7 @@ namespace barcodeReader
                     {
                         string code = Barcode.DecodeImage(curBarCode);
                         DisplayBarcode(code);
+                        lastBarcode = code;
                         stop();
                     }
                 }
@@ -109,7 +116,14 @@ namespace barcodeReader
         /// <param name="barcode">Barcode to attempt to gether information on</param>
         private void DisplayBarcode(string barcode)
         {
-            wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + barcode));            
+            if (source == 0)
+            {
+                wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + barcode));
+            }
+            else
+            {
+                wb_browser.Navigate(new Uri("http://searchupc.com/default.aspx?q=" + barcode));
+            }
         }
 
         /// <summary>
@@ -151,6 +165,25 @@ namespace barcodeReader
         private void nud_thres_ValueChanged(object sender, EventArgs e)
         {
             Barcode.threshold = (byte)nud_thres.Value;
+        }
+
+        /// <summary>
+        /// Stops processing if form loses focus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void form_lost_focus(object sender, EventArgs e)
+        {
+            stop();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            source = cb_source.SelectedIndex;
+            if (lastBarcode != "")
+            {
+                DisplayBarcode(lastBarcode);
+            }
         }
     }
 }
