@@ -66,5 +66,12 @@ namespace barcodeReader.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap overlayImageShort {
+            get {
+                object obj = ResourceManager.GetObject("overlayImageShort", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

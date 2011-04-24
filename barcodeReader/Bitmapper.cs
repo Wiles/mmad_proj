@@ -9,11 +9,15 @@ using System.Drawing;
 
 namespace barcodeReader
 {
+    /// <summary>
+    /// Contains functions for modifying a bitmap image
+    /// </summary>
     class Bitmapper
     {
         const int redOffset = 2;
         const int blueOffset = 1;
         const int greenOffset = 0;
+
         /// <summary>
         /// Converts a 24/32 bit bitmap to grayscale
         /// </summary>
@@ -104,13 +108,19 @@ namespace barcodeReader
         }
 
         /// <summary>
-        /// method for resizing an image
+        /// Resizes a bitmap image
         /// </summary>
-        /// <param name="img">the image to resize</param>
-        /// <param name="percentage">Percentage of change (i.e for 105% of the original provide 105)</param>
-        /// <returns></returns>
+        /// <param name="img">Image to resize</param>
+        /// <param name="width">desired height</param>
+        /// <param name="height">desired width</param>
+        /// <exception cref="ArgumentOutOfRangeException">Width and height must be positive.</exception>
+        /// <returns>resized bitmap</returns>
         public static Image Resize(Image img, Int32 width, Int32 height)
         {
+            if (width <= 0 || height <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Width and height must be positive.");
+            }
             //get the height and width of the image
             int originalW = img.Width;
             int originalH = img.Height;
@@ -132,6 +142,11 @@ namespace barcodeReader
             return (Image)bmp;
         }
 
+        /// <summary>
+        /// Creates a copy of a bitmap images
+        /// </summary>
+        /// <param name="img">Original Image</param>
+        /// <returns>Copy</returns>
         public static Image Copy(Image img)
         {
             //create a new Bitmap the size of the new image

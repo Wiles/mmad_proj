@@ -38,20 +38,23 @@
             this.nud_thres = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pb_threshold = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pb_barcode = new System.Windows.Forms.PictureBox();
-            this.pb_threshold = new System.Windows.Forms.PictureBox();
             this.gb_image.SuspendLayout();
             this.gb_data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_image
             // 
+            this.gb_image.Controls.Add(this.pictureBox2);
             this.gb_image.Controls.Add(this.pictureBox1);
             this.gb_image.Controls.Add(this.pb_barcode);
             this.gb_image.Location = new System.Drawing.Point(12, 71);
@@ -165,6 +168,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data Lookup";
             // 
+            // pb_threshold
+            // 
+            this.pb_threshold.Location = new System.Drawing.Point(6, 19);
+            this.pb_threshold.Name = "pb_threshold";
+            this.pb_threshold.Size = new System.Drawing.Size(320, 240);
+            this.pb_threshold.TabIndex = 2;
+            this.pb_threshold.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::barcodeReader.Properties.Resources.overlayImageShort;
+            this.pictureBox2.Location = new System.Drawing.Point(165, 120);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(3, 40);
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::barcodeReader.Properties.Resources.overlayImage;
@@ -181,14 +201,6 @@
             this.pb_barcode.Size = new System.Drawing.Size(320, 240);
             this.pb_barcode.TabIndex = 0;
             this.pb_barcode.TabStop = false;
-            // 
-            // pb_threshold
-            // 
-            this.pb_threshold.Location = new System.Drawing.Point(6, 19);
-            this.pb_threshold.Name = "pb_threshold";
-            this.pb_threshold.Size = new System.Drawing.Size(320, 240);
-            this.pb_threshold.TabIndex = 2;
-            this.pb_threshold.TabStop = false;
             // 
             // Form1
             // 
@@ -210,9 +222,10 @@
             this.gb_data.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,6 +246,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pb_threshold;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

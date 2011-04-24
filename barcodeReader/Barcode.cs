@@ -9,13 +9,22 @@ using System.Drawing;
 
 namespace barcodeReader
 {
+    /// <summary>
+    /// Processes images for UPC-a barcode
+    /// </summary>
     class Barcode
     {
         static public byte threshold = 128;
         static private Int32 rowsToAverage = 20;
+
+        /// <summary>
+        /// Attempts to read a barcode out of an image
+        /// </summary>
+        /// <param name="Image">Image to read</param>
+        /// <returns>barcode</returns>
         public static string DecodeImage(Bitmap Image)
         {
-            string barcode = "036000291452";
+            string barcode = "";
 
             Bitmapper.ThresholdImage(Image, threshold);
 
@@ -98,6 +107,11 @@ namespace barcodeReader
             return barcode;
         }
 
+        /// <summary>
+        /// Takes an array of thicknesses and converts this into a barcode number value
+        /// </summary>
+        /// <param name="lines">array of thicknesses</param>
+        /// <returns>barcode</returns>
         private static string DecodeThicknesses( Double[] lines )
         {
             if( lines.Length != 59 )
@@ -171,6 +185,12 @@ namespace barcodeReader
             return barcode;
         }
 
+        /// <summary>
+        /// Returns the green value for the middle 3/4 of one line of the image
+        /// </summary>
+        /// <param name="image">The image to read line from</param>
+        /// <param name="row">Which line to return</param>
+        /// <returns>the read line</returns>
         private static Int32[] ReadLine( Bitmap image, Int32 row )
         {
             /*
@@ -200,11 +220,13 @@ namespace barcodeReader
 
             return grayscaledRow;
              */
-            Int32 quarterWidth = image.Width / 4;
-            Int32[] rowRead = new Int32[quarterWidth*2];
-            for (int i = quarterWidth; i < quarterWidth*3; ++i)
+
+            //TODO make this use other way
+            Int32 eighthWidth = image.Width / 8;
+            Int32[] rowRead = new Int32[eighthWidth * 6];
+            for (int i = eighthWidth; i < eighthWidth * 7; ++i)
             {
-                rowRead[i - quarterWidth] = image.GetPixel(i, row).G;
+                rowRead[i - eighthWidth] = image.GetPixel(i, row).G;
             }
             return rowRead;
 
