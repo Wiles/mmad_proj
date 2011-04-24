@@ -9,21 +9,15 @@ using System.IO;
 
 namespace barcodeReader
 {
-    class Camera
-    {
-        vidcap2005 cap;
-
-        public Camera()
-        {
-            cap = new vidcap2005();
-            cap.InitializeCapture(640, 480, 15, 0);
-            cap.ControlCapture(true);
-        }
-
-        public Bitmap AcquireImage()
-        {
-            Bitmap image = (Bitmap)Bitmapper.Copy(new Bitmap(cap.GetSnapshot()));
-            return image;
-        }
+    /// <summary>
+    /// Allows programme to interact with a camera without knowing the specifics
+    /// </summary>
+    interface Camera
+    {       
+        /// <summary>
+        /// Gets and returns a bitmap image from the camera device
+        /// </summary>
+        /// <returns>Bitmap image</returns>
+        Bitmap AcquireImage();
     }
 }

@@ -73,6 +73,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="vidcap2005.cs" />
+    <Compile Include="vidcapCamera.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,7 +119,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\overlayImageShort.bmp" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\overlayImage.bmp" />
   </ItemGroup>
