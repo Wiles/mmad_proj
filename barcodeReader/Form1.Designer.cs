@@ -29,7 +29,11 @@
         private void InitializeComponent()
         {
             this.gb_image = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pb_barcode = new System.Windows.Forms.PictureBox();
             this.gb_data = new System.Windows.Forms.GroupBox();
+            this.pb_threshold = new System.Windows.Forms.PictureBox();
             this.wb_browser = new System.Windows.Forms.WebBrowser();
             this.btn_run = new System.Windows.Forms.Button();
             this.tb_errors = new System.Windows.Forms.Label();
@@ -38,18 +42,16 @@
             this.nud_thres = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pb_threshold = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pb_barcode = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cb_source = new System.Windows.Forms.ComboBox();
             this.gb_image.SuspendLayout();
-            this.gb_data.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).BeginInit();
+            this.gb_data.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_image
@@ -64,6 +66,32 @@
             this.gb_image.TabStop = false;
             this.gb_image.Text = "Raw";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::barcodeReader.Properties.Resources.overlayImageShort;
+            this.pictureBox2.Location = new System.Drawing.Point(165, 120);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(3, 40);
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::barcodeReader.Properties.Resources.overlayImage;
+            this.pictureBox1.Location = new System.Drawing.Point(86, 138);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(160, 3);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pb_barcode
+            // 
+            this.pb_barcode.Location = new System.Drawing.Point(6, 19);
+            this.pb_barcode.Name = "pb_barcode";
+            this.pb_barcode.Size = new System.Drawing.Size(320, 240);
+            this.pb_barcode.TabIndex = 0;
+            this.pb_barcode.TabStop = false;
+            // 
             // gb_data
             // 
             this.gb_data.Controls.Add(this.pb_threshold);
@@ -73,6 +101,14 @@
             this.gb_data.TabIndex = 1;
             this.gb_data.TabStop = false;
             this.gb_data.Text = "Thresholded";
+            // 
+            // pb_threshold
+            // 
+            this.pb_threshold.Location = new System.Drawing.Point(6, 19);
+            this.pb_threshold.Name = "pb_threshold";
+            this.pb_threshold.Size = new System.Drawing.Size(320, 240);
+            this.pb_threshold.TabIndex = 2;
+            this.pb_threshold.TabStop = false;
             // 
             // wb_browser
             // 
@@ -168,45 +204,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data Lookup";
             // 
-            // pb_threshold
+            // label3
             // 
-            this.pb_threshold.Location = new System.Drawing.Point(6, 19);
-            this.pb_threshold.Name = "pb_threshold";
-            this.pb_threshold.Size = new System.Drawing.Size(320, 240);
-            this.pb_threshold.TabIndex = 2;
-            this.pb_threshold.TabStop = false;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(217, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Source:";
             // 
-            // pictureBox2
+            // cb_source
             // 
-            this.pictureBox2.Image = global::barcodeReader.Properties.Resources.overlayImageShort;
-            this.pictureBox2.Location = new System.Drawing.Point(165, 120);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(3, 40);
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::barcodeReader.Properties.Resources.overlayImage;
-            this.pictureBox1.Location = new System.Drawing.Point(86, 138);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(160, 3);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pb_barcode
-            // 
-            this.pb_barcode.Location = new System.Drawing.Point(6, 19);
-            this.pb_barcode.Name = "pb_barcode";
-            this.pb_barcode.Size = new System.Drawing.Size(320, 240);
-            this.pb_barcode.TabIndex = 0;
-            this.pb_barcode.TabStop = false;
+            this.cb_source.FormattingEnabled = true;
+            this.cb_source.Location = new System.Drawing.Point(267, 38);
+            this.cb_source.Name = "cb_source";
+            this.cb_source.Size = new System.Drawing.Size(121, 21);
+            this.cb_source.TabIndex = 11;
+            this.cb_source.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 529);
+            this.Controls.Add(this.cb_source);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nud_thres);
@@ -218,14 +240,15 @@
             this.Controls.Add(this.gb_image);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Deactivate += new System.EventHandler(this.form_lost_focus);
             this.gb_image.ResumeLayout(false);
-            this.gb_data.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_barcode)).EndInit();
+            this.gb_data.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,6 +270,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pb_threshold;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cb_source;
     }
 }
 
