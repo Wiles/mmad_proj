@@ -19,5 +19,6 @@ namespace barcodeReader
         /// </summary>
         /// <returns>Bitmap image</returns>
         Bitmap AcquireImage();
+        void Dispose();
     }
 }

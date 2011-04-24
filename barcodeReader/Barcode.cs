@@ -15,7 +15,7 @@ namespace barcodeReader
     class Barcode
     {
         static public byte threshold = 128;
-        static private Int32 rowsToAverage = 20;
+        static private Int32 rowsToAverage = 50;
 
         /// <summary>
         /// Attempts to read a barcode out of an image

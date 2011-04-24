@@ -44,6 +44,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cb_source = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cb_vidcap = new System.Windows.Forms.ComboBox();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -59,7 +61,7 @@
             this.gb_image.Controls.Add(this.pictureBox2);
             this.gb_image.Controls.Add(this.pictureBox1);
             this.gb_image.Controls.Add(this.pb_barcode);
-            this.gb_image.Location = new System.Drawing.Point(12, 71);
+            this.gb_image.Location = new System.Drawing.Point(12, 84);
             this.gb_image.Name = "gb_image";
             this.gb_image.Size = new System.Drawing.Size(332, 268);
             this.gb_image.TabIndex = 0;
@@ -95,7 +97,7 @@
             // gb_data
             // 
             this.gb_data.Controls.Add(this.pb_threshold);
-            this.gb_data.Location = new System.Drawing.Point(350, 71);
+            this.gb_data.Location = new System.Drawing.Point(350, 84);
             this.gb_data.Name = "gb_data";
             this.gb_data.Size = new System.Drawing.Size(335, 268);
             this.gb_data.TabIndex = 1;
@@ -118,7 +120,7 @@
             this.wb_browser.Location = new System.Drawing.Point(6, 19);
             this.wb_browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wb_browser.Name = "wb_browser";
-            this.wb_browser.Size = new System.Drawing.Size(658, 147);
+            this.wb_browser.Size = new System.Drawing.Size(660, 143);
             this.wb_browser.TabIndex = 2;
             // 
             // btn_run
@@ -134,7 +136,7 @@
             // tb_errors
             // 
             this.tb_errors.AutoSize = true;
-            this.tb_errors.Location = new System.Drawing.Point(156, 18);
+            this.tb_errors.Location = new System.Drawing.Point(154, 68);
             this.tb_errors.Name = "tb_errors";
             this.tb_errors.Size = new System.Drawing.Size(33, 13);
             this.tb_errors.TabIndex = 4;
@@ -185,7 +187,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(95, 18);
+            this.label2.Location = new System.Drawing.Point(93, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 8;
@@ -197,9 +199,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.wb_browser);
-            this.groupBox1.Location = new System.Drawing.Point(12, 345);
+            this.groupBox1.Location = new System.Drawing.Point(12, 349);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(672, 172);
+            this.groupBox1.Size = new System.Drawing.Size(674, 168);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data Lookup";
@@ -207,26 +209,46 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(217, 41);
+            this.label3.Location = new System.Drawing.Point(233, 41);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Source:";
+            this.label3.Text = "Site:";
             // 
             // cb_source
             // 
             this.cb_source.FormattingEnabled = true;
             this.cb_source.Location = new System.Drawing.Point(267, 38);
             this.cb_source.Name = "cb_source";
-            this.cb_source.Size = new System.Drawing.Size(121, 21);
+            this.cb_source.Size = new System.Drawing.Size(185, 21);
             this.cb_source.TabIndex = 11;
             this.cb_source.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(217, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Source:";
+            // 
+            // cb_vidcap
+            // 
+            this.cb_vidcap.FormattingEnabled = true;
+            this.cb_vidcap.Location = new System.Drawing.Point(267, 11);
+            this.cb_vidcap.Name = "cb_vidcap";
+            this.cb_vidcap.Size = new System.Drawing.Size(185, 21);
+            this.cb_vidcap.TabIndex = 13;
+            this.cb_vidcap.SelectedIndexChanged += new System.EventHandler(this.cb_vidcap_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 529);
+            this.ClientSize = new System.Drawing.Size(704, 529);
+            this.Controls.Add(this.cb_vidcap);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cb_source);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
@@ -272,6 +294,8 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cb_source;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cb_vidcap;
     }
 }
 

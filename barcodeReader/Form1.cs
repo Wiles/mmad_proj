@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Threading;
+using VideoCapture2005;
 
 namespace barcodeReader
 {
@@ -17,10 +18,11 @@ namespace barcodeReader
     public partial class Form1 : Form
     {
         private Int32 readDelay = 250;
-        private Camera cam;
+        private Camera cam = null;
         private Mutex mu;
         private bool run = false;
-        private Int32 source = 0;
+        private Int32 webSource = 0;
+        private Int32 vidSource = -1;
         private System.Threading.Timer tim = null;
         private string lastBarcode = "";
 
@@ -33,14 +35,15 @@ namespace barcodeReader
         public Form1()
         {
             InitializeComponent();
-            cam = new vidcapCamera();
             mu = new Mutex();
             cap = new CaptureImage(imgCap);
             nud_thres.Value = Barcode.threshold;
 
             cb_source.Items.Add("upcdatabase.com");
             cb_source.Items.Add("searchupc.com");
+            cb_source.Items.Add("www.somewhereincanada.com");
             cb_source.SelectedIndex = 0;
+            LoadVidCapSources();
         }
 
         /// <summary>
@@ -51,6 +54,17 @@ namespace barcodeReader
         private void btn_run_Click(object sender, EventArgs e)
         {
             start();
+            btn_stop.Select();
+        }
+
+        /// <summary>
+        /// Stop processing images on click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_stop_Click(object sender, EventArgs e)
+        {
+            stop();
         }
 
         /// <summary>
@@ -101,28 +115,22 @@ namespace barcodeReader
         }
 
         /// <summary>
-        /// Stop processing images on click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_stop_Click(object sender, EventArgs e)
-        {
-            stop();
-        }
-
-        /// <summary>
         /// Takes a barcode and retrives and displays external information about it
         /// </summary>
         /// <param name="barcode">Barcode to attempt to gether information on</param>
         private void DisplayBarcode(string barcode)
         {
-            if (source == 0)
+            if (webSource == 0)
             {
                 wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + barcode));
             }
-            else
+            else if (webSource == 1)
             {
                 wb_browser.Navigate(new Uri("http://searchupc.com/default.aspx?q=" + barcode));
+            }
+            else
+            {
+                wb_browser.Navigate(new Uri("http://www.somewhereincanada.com/cgi/links/search.cgi?database=upc&query=" + barcode));
             }
         }
 
@@ -154,6 +162,7 @@ namespace barcodeReader
                 run = false;
                 btn_run.Enabled = true;
                 btn_stop.Enabled = false;
+                btn_run.Select();
             }
         }
 
@@ -179,11 +188,44 @@ namespace barcodeReader
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            source = cb_source.SelectedIndex;
+            webSource = cb_source.SelectedIndex;
             if (lastBarcode != "")
             {
                 DisplayBarcode(lastBarcode);
             }
+        }
+
+        private void cb_vidcap_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cb_vidcap.SelectedIndex == vidSource)
+            {
+                return;
+            }
+            try
+            {
+                if (this.cam != null)
+                {
+                    this.cam.Dispose();
+                }
+                Camera cam = new vidcapCamera(cb_vidcap.SelectedIndex);
+                this.cam = cam;
+                vidSource = cb_vidcap.SelectedIndex;
+            }
+            catch
+            {
+                MessageBox.Show("Could Not change devices.");
+            }
+        }
+
+        private void LoadVidCapSources()
+        {
+            cb_vidcap.Items.Clear();
+            vidcap2005 vid = new vidcap2005();
+            for (int i = 0; i < vid.GetNumberOfCaptureDevices(); ++i)
+            {
+                cb_vidcap.Items.Add(vid.GetCaptureDeviceName(i));
+            }
+            cb_vidcap.SelectedIndex = 0;
         }
     }
 }
