@@ -41,7 +41,6 @@ namespace barcodeReader
 
             cb_source.Items.Add("upcdatabase.com");
             cb_source.Items.Add("searchupc.com");
-            cb_source.Items.Add("www.somewhereincanada.com");
             cb_source.SelectedIndex = 0;
             LoadVidCapSources();
             cb_vidcap.SelectedIndex = 0;
@@ -125,13 +124,9 @@ namespace barcodeReader
             {
                 wb_browser.Navigate(new Uri("http://www.upcdatabase.com/item/" + barcode));
             }
-            else if (webSource == 1)
-            {
-                wb_browser.Navigate(new Uri("http://searchupc.com/default.aspx?q=" + barcode));
-            }
             else
             {
-                wb_browser.Navigate(new Uri("http://www.somewhereincanada.com/cgi/links/search.cgi?database=upc&query=" + barcode));
+                wb_browser.Navigate(new Uri("http://searchupc.com/default.aspx?q=" + barcode));
             }
         }
 
