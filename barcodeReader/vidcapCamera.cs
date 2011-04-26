@@ -12,7 +12,7 @@ namespace barcodeReader
     /// <summary>
     /// Implements the camera interface for a vidcap device
     /// </summary>
-    class vidcapCamera : Camera, IDisposable
+    class vidcapCamera : Camera
     {
         vidcap2005 cap;
 
@@ -32,8 +32,7 @@ namespace barcodeReader
         /// <returns>Bitmap image</returns>
         public Bitmap AcquireImage()
         {
-            Bitmap image = (Bitmap)Bitmapper.Copy(new Bitmap(cap.GetSnapshot()));
-            return image;
+            return new Bitmap(cap.GetSnapshot());
         }
 
         ~vidcapCamera()

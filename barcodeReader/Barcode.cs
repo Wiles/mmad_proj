@@ -102,7 +102,7 @@ namespace barcodeReader
 
             if (ValidateBarCode(barcode) == false)
             {
-                throw new ArgumentException("Invalid barcode: " + barcode);
+                throw new BarcodeException("Checksum fail.");
             }
             return barcode;
         }
@@ -114,25 +114,26 @@ namespace barcodeReader
         /// <returns>barcode</returns>
         private static string DecodeThicknesses( Double[] lines )
         {
+            Boolean valid = true;
             if( lines.Length != 59 )
             {
-                throw new ArgumentException("Must have 30 bars");
+                throw new BarcodeException("Must have 30 bars");
             }
 
             //Check start
             if (lines[0] != 1 || lines[1] != 1 || lines[2] != 1)
             {
-                throw new ArgumentException("Start sequence incorrect");
+                throw new BarcodeException("Start sequence incorrect");
             }
             //Check End
             if (lines[56] != 1 || lines[57] != 1 || lines[58] != 1)
             {
-                throw new ArgumentException("End sequence incorrect");
+                throw new BarcodeException("End sequence incorrect");
             }
             //Check middle
-            if (lines[27] != 1 || lines[28] != 1 || lines[29] != 1)
+            if (lines[27] != 1 || lines[28] != 1 || lines[29] != 1 || lines[30] != 1 || lines[31] != 1)
             {
-                throw new ArgumentException("Middle sequence incorrect");
+                throw new BarcodeException("Middle sequence incorrect");
             }
 
             //remove checks
@@ -177,10 +178,14 @@ namespace barcodeReader
                         barcode += "9";
                         break;
                     default:
-                        //TODO error
+                        valid = false;
+                        barcode += "_";
                         break;
-
                 }
+            }
+            if (valid == false)
+            {
+                throw new BarcodeException(barcode);
             }
             return barcode;
         }
@@ -193,6 +198,10 @@ namespace barcodeReader
         /// <returns>the read line</returns>
         private static Int32[] ReadLine( Bitmap image, Int32 row )
         {
+            
+            Int32 eighthWidth = image.Width / 8;
+            Int32[] rowRead = new Int32[eighthWidth * 6];
+
             /*
             Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
             System.Drawing.Imaging.BitmapData bmpData =
@@ -205,34 +214,42 @@ namespace barcodeReader
             int numBytes = numPixels * sizeof(int);
 
             byte[] rgbValues = new byte[numBytes];
-            Int32[] grayscaledRow = new Int32[image.Width];
 
             Marshal.Copy(ptr, rgbValues, 0, numBytes);
-
-            for (int i = 0; i < image.Width; ++i)
+            Int32 start = (image.Width * row + eighthWidth + 2)*4;
+            Int32 end = start + (eighthWidth * 24);
+            for (int i = start; i < end; i += sizeof(int))
             {
-                Int32 x = ((i * 4) + 2) + image.Width * row;
-                grayscaledRow[i] = rgbValues[((i*4) + 2) + image.Width * row];
+                try
+                {
+                    rowRead[(i - start)/4] = rgbValues[i];
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
 
             Marshal.Copy(rgbValues, 0, ptr, numBytes);
             image.UnlockBits(bmpData);
 
-            return grayscaledRow;
-             */
-
+            return rowRead;
+            */
+            
             //TODO make this use other way
-            Int32 eighthWidth = image.Width / 8;
-            Int32[] rowRead = new Int32[eighthWidth * 6];
             for (int i = eighthWidth; i < eighthWidth * 7; ++i)
             {
                 rowRead[i - eighthWidth] = image.GetPixel(i, row).G;
             }
             return rowRead;
-
-
+            
         }
 
+        /// <summary>
+        /// Checks the checksum against the number in the barcode
+        /// </summary>
+        /// <param name="barcode">String representing a barcode</param>
+        /// <returns>true if checksum is valid</returns>
         private static Boolean ValidateBarCode(string barcode)
         {
             Boolean isValid = true;
