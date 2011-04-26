@@ -1,4 +1,14 @@
-﻿using System;
+﻿/**
+ * \file vidcap2005.cs
+ * \instructor Ignac Kolenko
+ * \course Multimedia Application Development
+ * \assignment Milestone #3
+ * \author Ignac Kolenko
+ * \brief
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Security;

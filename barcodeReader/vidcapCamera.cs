@@ -1,4 +1,14 @@
-﻿using System;
+﻿/**
+ * \file vidcapCamera.cs
+ * \instructor Ignac Kolenko
+ * \course Multimedia Application Development
+ * \assignment Milestone #3
+ * \author Samuel Lewis, Hekar, Thomas
+ * \brief
+ *  
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,11 +45,17 @@ namespace barcodeReader
             return new Bitmap(cap.GetSnapshot());
         }
 
+        /// <summary>
+        /// Destruction of camera
+        /// </summary>
         ~vidcapCamera()
         {
             this.Dispose();
         }
 
+        /// <summary>
+        /// End the usage of the camera
+        /// </summary>
         public void Dispose()
         {
             cap.EndCapture();
