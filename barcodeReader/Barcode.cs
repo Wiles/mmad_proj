@@ -25,7 +25,8 @@ namespace barcodeReader
     class Barcode
     {
         static public byte threshold = 128;
-        static private Int32 rowsToAverage = 50;
+        static private Int32 rowsToAverage = 20;
+        private static string[] widths = null;
 
         /// <summary>
         /// Attempts to read a barcode out of an image
@@ -158,49 +159,53 @@ namespace barcodeReader
             for (int i = 0; i < numbers.Length; i += 4)
             {
                 string lineWidth = numbers[i].ToString() + numbers[i + 1].ToString() + numbers[i + 2].ToString() + numbers[i + 3].ToString(); 
-                switch( lineWidth )
-                {
-                    case "3211":
-                        barcode += "0";
-                        break;
-                    case "2221":
-                        barcode += "1";
-                        break;
-                    case "2122":
-                        barcode += "2";
-                        break;
-                    case "1411":
-                        barcode += "3";
-                        break;
-                    case "1132":
-                        barcode += "4";
-                        break;
-                    case "1231":
-                        barcode += "5";
-                        break;
-                    case "1114":
-                        barcode += "6";
-                        break;
-                    case "1312":
-                        barcode += "7";
-                        break;
-                    case "1213":
-                        barcode += "8";
-                        break;
-                    case "3112":
-                        barcode += "9";
-                        break;
-                    default:
-                        valid = false;
-                        barcode += "_";
-                        break;
-                }
+                
+                barcode += findBestMatch(lineWidth);
             }
             if (valid == false)
             {
                 throw new BarcodeException(barcode);
             }
             return barcode;
+        }
+
+        private static char findBestMatch(string lineWidth)
+        {
+            if (Barcode.widths == null)
+            {
+                Barcode.widths = new string[10]{
+                    "3211",
+                    "2221",
+                    "2122",
+                    "1411",
+                    "1132",
+                    "1231",
+                    "1114",
+                    "1312",
+                    "1213",
+                    "3112"
+        };
+            }
+            char bestMatch = '0';
+            Int32 matchFactor = Int32.MaxValue;
+            Int32 offset = 0;
+            foreach(string width in widths)
+            {
+                Int32 difference = 0;
+
+                for (int i = 0; i < width.Length; ++i)
+                {
+                    difference += Math.Abs(lineWidth[i] - width[i]);
+                }
+
+                if (difference <= matchFactor)
+                {
+                    matchFactor = difference;
+                    bestMatch = (char)(offset + '0');
+                }
+                ++offset;
+            }
+            return bestMatch;
         }
 
         /// <summary>
@@ -210,8 +215,7 @@ namespace barcodeReader
         /// <param name="row">Which line to return</param>
         /// <returns>the read line</returns>
         private static Int32[] ReadLine( Bitmap image, Int32 row )
-        {
-            
+        {            
             Int32 eighthWidth = image.Width / 8;
             Int32[] rowRead = new Int32[eighthWidth * 6];
 
