@@ -1,4 +1,14 @@
-﻿using System;
+﻿/**
+ * \file Form1.cs
+ * \instructor Ignac Kolenko
+ * \course Multimedia Application Development
+ * \assignment Milestone #3
+ * \author Ignac Kolenko
+ * \brief
+ *  Main form of application
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,13 +27,44 @@ namespace barcodeReader
     /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Sleep delay between reads
+        /// </summary>
         private Int32 readDelay = 250;
+
+        /// <summary>
+        /// Camera for reading in live image
+        /// </summary>
         private Camera cam = null;
+
+        /// <summary>
+        /// Mutex for singular camera access
+        /// </summary>
         private Mutex mu;
+
+        /// <summary>
+        /// Are we currently capturing live barcodes?
+        /// </summary>
         private bool run = false;
+
+        /// <summary>
+        /// Currently selected lookup web source
+        /// </summary>
         private Int32 webSource = 0;
+
+        /// <summary>
+        /// Identifier for image input device
+        /// </summary>
         private Int32 vidSource = -1;
+
+        /// <summary>
+        /// Timer for timing reads
+        /// </summary>
         private System.Threading.Timer tim = null;
+
+        /// <summary>
+        /// Last barcode read
+        /// </summary>
         private string lastBarcode = "";
 
         private delegate void CaptureImage();
@@ -86,6 +127,8 @@ namespace barcodeReader
             {
                 return;
             }
+
+            // Do allow multiple reads at the same time from timer interrupts
             if (mu.WaitOne(1))
             {
                 try
@@ -150,7 +193,7 @@ namespace barcodeReader
         }
 
         /// <summary>
-        /// Stops the applicatin from reading barcodes
+        /// Stops the application from reading barcodes
         /// </summary>
         private void stop()
         {
@@ -222,6 +265,9 @@ namespace barcodeReader
             }
         }
 
+        /// <summary>
+        /// Find the possible cameras and add them to the selection menu
+        /// </summary>
         private void LoadVidCapSources()
         {
             cb_vidcap.Items.Clear();

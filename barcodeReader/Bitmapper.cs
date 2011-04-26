@@ -1,4 +1,14 @@
-﻿using System;
+﻿/**
+ * \file Bitmappers.cs
+ * \instructor Ignac Kolenko
+ * \course Multimedia Application Development
+ * \assignment Milestone #3
+ * \author Samuel Lewis, Hekar, Thomas
+ * \brief
+ *  Miscellaneous bitmap functions
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -1,8 +1,18 @@
-﻿using System;
+﻿/**
+ * \file Barcode.cs
+ * \instructor Ignac Kolenko
+ * \course Multimedia Application Development
+ * \assignment Milestone #3
+ * \author Samuel Lewis, Hekar, Thomas
+ * \brief
+ *  
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 
 using System.Runtime.InteropServices;
 using System.Drawing;
@@ -32,8 +42,10 @@ namespace barcodeReader
 
             Int32 startRow = (Image.Height / 2) - (rowsToAverage / 2);
 
+            // Read multiple rows of the barcode
             for (int i = 0; i < rowsToAverage; ++i )
             {
+                // Read in a single line
                 Int32[] row = ReadLine(Image, startRow + i);
                 Int32 offset = -1;
                 Int32 currentColor = row[0];
@@ -58,7 +70,7 @@ namespace barcodeReader
                             currentColor = row[j];
                             lineWidth[offset] += rowWidth;
                             rowWidth = 1;
-                            offset++;
+                            ++offset;
                             if (offset == lineWidth.Length)
                             {
                                 break;
@@ -141,6 +153,7 @@ namespace barcodeReader
             Array.Copy(lines, 3, numbers, 0, 24);
             Array.Copy(lines, 32, numbers, 24, 24);
 
+            // Decode the barcode through the bar widths
             string barcode = "";
             for (int i = 0; i < numbers.Length; i += 4)
             {
@@ -202,7 +215,8 @@ namespace barcodeReader
             Int32 eighthWidth = image.Width / 8;
             Int32[] rowRead = new Int32[eighthWidth * 6];
 
-            /*
+            //TODO: get this working!
+#if false
             Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
             System.Drawing.Imaging.BitmapData bmpData =
                 image.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite,
@@ -234,7 +248,7 @@ namespace barcodeReader
             image.UnlockBits(bmpData);
 
             return rowRead;
-            */
+#endif // false
             
             //TODO make this use other way
             for (int i = eighthWidth; i < eighthWidth * 7; ++i)
