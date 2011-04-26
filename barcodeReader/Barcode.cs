@@ -24,8 +24,9 @@ namespace barcodeReader
     /// </summary>
     class Barcode
     {
-        static public byte threshold = 128;
-        static private Int32 rowsToAverage = 20;
+        public static byte threshold = 128;
+        public static Int32 rowsToAverage = 50;
+        private static Int32 differenceTolerence = 2; 
         private static string[] widths = null;
 
         /// <summary>
@@ -44,6 +45,11 @@ namespace barcodeReader
             Int32 startRow = (Image.Height / 2) - (rowsToAverage / 2);
 
             // Read multiple rows of the barcode
+            if (rowsToAverage > Image.Height)
+            {
+                rowsToAverage = Image.Height;
+            }
+
             for (int i = 0; i < rowsToAverage; ++i )
             {
                 // Read in a single line
@@ -115,7 +121,7 @@ namespace barcodeReader
 
             if (ValidateBarCode(barcode) == false)
             {
-                throw new BarcodeException("Checksum fail.");
+                throw new BarcodeException("Checksum fail: " + barcode);
             }
             return barcode;
         }
@@ -159,7 +165,11 @@ namespace barcodeReader
             for (int i = 0; i < numbers.Length; i += 4)
             {
                 string lineWidth = numbers[i].ToString() + numbers[i + 1].ToString() + numbers[i + 2].ToString() + numbers[i + 3].ToString(); 
-                
+                char nextNumber = findBestMatch(lineWidth);
+                if( nextNumber == '_' )
+                {
+                    valid = false;
+                }
                 barcode += findBestMatch(lineWidth);
             }
             if (valid == false)
@@ -184,9 +194,10 @@ namespace barcodeReader
                     "1312",
                     "1213",
                     "3112"
-        };
+                };
             }
-            char bestMatch = '0';
+
+            char bestMatch = '_';
             Int32 matchFactor = Int32.MaxValue;
             Int32 offset = 0;
             foreach(string width in widths)
@@ -198,7 +209,7 @@ namespace barcodeReader
                     difference += Math.Abs(lineWidth[i] - width[i]);
                 }
 
-                if (difference <= matchFactor)
+                if (difference <= matchFactor && difference <= differenceTolerence)
                 {
                     matchFactor = difference;
                     bestMatch = (char)(offset + '0');

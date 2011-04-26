@@ -79,7 +79,7 @@ namespace barcodeReader
             mu = new Mutex();
             cap = new CaptureImage(imgCap);
             nud_thres.Value = Barcode.threshold;
-
+            nud_lines.Value = Barcode.rowsToAverage;
             cb_source.Items.Add("upcdatabase.com");
             cb_source.Items.Add("searchupc.com");
             cb_source.SelectedIndex = 0;
@@ -276,6 +276,11 @@ namespace barcodeReader
         private void btn_vid_reload_Click(object sender, EventArgs e)
         {
             LoadVidCapSources();
+        }
+
+        private void nud_lines_ValueChanged(object sender, EventArgs e)
+        {
+            Barcode.rowsToAverage = (Int32)nud_lines.Value;
         }
     }
 }
