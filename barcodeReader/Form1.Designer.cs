@@ -47,6 +47,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cb_vidcap = new System.Windows.Forms.ComboBox();
             this.btn_vid_reload = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nud_lines = new System.Windows.Forms.NumericUpDown();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,6 +57,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_lines)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_image
@@ -253,11 +256,45 @@
             this.btn_vid_reload.UseVisualStyleBackColor = true;
             this.btn_vid_reload.Click += new System.EventHandler(this.btn_vid_reload_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(115, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Lines:";
+            // 
+            // nud_lines
+            // 
+            this.nud_lines.Location = new System.Drawing.Point(156, 11);
+            this.nud_lines.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_lines.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_lines.Name = "nud_lines";
+            this.nud_lines.Size = new System.Drawing.Size(55, 20);
+            this.nud_lines.TabIndex = 16;
+            this.nud_lines.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_lines.ValueChanged += new System.EventHandler(this.nud_lines_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 529);
+            this.Controls.Add(this.nud_lines);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btn_vid_reload);
             this.Controls.Add(this.cb_vidcap);
             this.Controls.Add(this.label4);
@@ -283,6 +320,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_threshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nud_lines)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,6 +347,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cb_vidcap;
         private System.Windows.Forms.Button btn_vid_reload;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown nud_lines;
     }
 }
 
