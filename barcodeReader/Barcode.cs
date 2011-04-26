@@ -26,7 +26,6 @@ namespace barcodeReader
     {
         public static byte threshold = 128;
         public static Int32 rowsToAverage = 50;
-        private static Int32 differenceTolerence = 2; 
         private static string[] widths = null;
 
         /// <summary>
@@ -164,8 +163,19 @@ namespace barcodeReader
             string barcode = "";
             for (int i = 0; i < numbers.Length; i += 4)
             {
-                string lineWidth = numbers[i].ToString() + numbers[i + 1].ToString() + numbers[i + 2].ToString() + numbers[i + 3].ToString(); 
-                char nextNumber = findBestMatch(lineWidth);
+                string lineWidth = numbers[i].ToString() + numbers[i + 1].ToString() + numbers[i + 2].ToString() + numbers[i + 3].ToString();
+
+                char nextNumber;
+
+                if (i == 11)
+                {
+                    //Checksum must be exact
+                    nextNumber = findBestMatch(lineWidth, 0);
+                }
+                else
+                {
+                    nextNumber = findBestMatch(lineWidth);
+                }
                 if( nextNumber == '_' )
                 {
                     valid = false;
@@ -179,7 +189,7 @@ namespace barcodeReader
             return barcode;
         }
 
-        private static char findBestMatch(string lineWidth)
+        private static char findBestMatch(string lineWidth, Int32 differenceTolerence = 2)
         {
             if (Barcode.widths == null)
             {
