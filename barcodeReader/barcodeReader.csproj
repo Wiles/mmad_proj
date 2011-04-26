@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Barcode.cs" />
+    <Compile Include="BarcodeException.cs" />
     <Compile Include="Bitmapper.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Form1.cs">

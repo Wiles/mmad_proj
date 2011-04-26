@@ -46,6 +46,7 @@
             this.cb_source = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cb_vidcap = new System.Windows.Forms.ComboBox();
+            this.btn_vid_reload = new System.Windows.Forms.Button();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -120,7 +121,7 @@
             this.wb_browser.Location = new System.Drawing.Point(6, 19);
             this.wb_browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wb_browser.Name = "wb_browser";
-            this.wb_browser.Size = new System.Drawing.Size(660, 143);
+            this.wb_browser.Size = new System.Drawing.Size(660, 134);
             this.wb_browser.TabIndex = 2;
             // 
             // btn_run
@@ -199,9 +200,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.wb_browser);
-            this.groupBox1.Location = new System.Drawing.Point(12, 349);
+            this.groupBox1.Location = new System.Drawing.Point(12, 358);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(674, 168);
+            this.groupBox1.Size = new System.Drawing.Size(674, 159);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data Lookup";
@@ -242,11 +243,22 @@
             this.cb_vidcap.TabIndex = 13;
             this.cb_vidcap.SelectedIndexChanged += new System.EventHandler(this.cb_vidcap_SelectedIndexChanged);
             // 
+            // btn_vid_reload
+            // 
+            this.btn_vid_reload.Location = new System.Drawing.Point(459, 12);
+            this.btn_vid_reload.Name = "btn_vid_reload";
+            this.btn_vid_reload.Size = new System.Drawing.Size(75, 23);
+            this.btn_vid_reload.TabIndex = 14;
+            this.btn_vid_reload.Text = "Reload";
+            this.btn_vid_reload.UseVisualStyleBackColor = true;
+            this.btn_vid_reload.Click += new System.EventHandler(this.btn_vid_reload_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 529);
+            this.Controls.Add(this.btn_vid_reload);
             this.Controls.Add(this.cb_vidcap);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cb_source);
@@ -296,6 +308,7 @@
         private System.Windows.Forms.ComboBox cb_source;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cb_vidcap;
+        private System.Windows.Forms.Button btn_vid_reload;
     }
 }
 

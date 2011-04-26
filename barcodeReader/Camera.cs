@@ -12,13 +12,12 @@ namespace barcodeReader
     /// <summary>
     /// Allows programme to interact with a camera without knowing the specifics
     /// </summary>
-    interface Camera
+    interface Camera : IDisposable
     {       
         /// <summary>
         /// Gets and returns a bitmap image from the camera device
         /// </summary>
         /// <returns>Bitmap image</returns>
         Bitmap AcquireImage();
-        void Dispose();
     }
 }

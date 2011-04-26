@@ -44,6 +44,7 @@ namespace barcodeReader
             cb_source.Items.Add("www.somewhereincanada.com");
             cb_source.SelectedIndex = 0;
             LoadVidCapSources();
+            cb_vidcap.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace barcodeReader
             {
                 return;
             }
-            if (mu.WaitOne(10))
+            if (mu.WaitOne(1))
             {
                 try
                 {
@@ -188,6 +189,10 @@ namespace barcodeReader
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (webSource == cb_source.SelectedIndex)
+            {
+                return;
+            }
             webSource = cb_source.SelectedIndex;
             if (lastBarcode != "")
             {
@@ -225,7 +230,11 @@ namespace barcodeReader
             {
                 cb_vidcap.Items.Add(vid.GetCaptureDeviceName(i));
             }
-            cb_vidcap.SelectedIndex = 0;
+        }
+
+        private void btn_vid_reload_Click(object sender, EventArgs e)
+        {
+            LoadVidCapSources();
         }
     }
 }
