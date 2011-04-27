@@ -199,22 +199,20 @@ namespace barcodeReader
                 string lineWidth = numbers[i].ToString() + numbers[i + 1].ToString() + numbers[i + 2].ToString() + numbers[i + 3].ToString();
 
                 char nextNumber;
-                Int32 numberUncertainty;
 
                 if (i == 11)
                 {
                     //Checksum must be exact
-                    nextNumber = findBestMatch(lineWidth, out numberUncertainty, 0);
+                    nextNumber = findBestMatch(lineWidth, 0);
                 }
                 else
                 {
-                    nextNumber = findBestMatch(lineWidth, out numberUncertainty);
+                    nextNumber = findBestMatch(lineWidth);
                 }
                 if( nextNumber == '_' )
                 {
                     valid = false;
                 }
-                this.uncertainty += numberUncertainty;
                 this.barcode += nextNumber;
             }
             if (valid == false)
@@ -230,7 +228,7 @@ namespace barcodeReader
         /// <param name="uncertainty">Output parameter, how much it trues it's choise. Lower is better.</param>
         /// <param name="differenceTolerence">How close the line widths have to match the stored examples</param>
         /// <returns>barcode</returns>
-        private char findBestMatch(string lineWidth, out Int32 uncertainty, Int32 differenceTolerence = 2)
+        private char findBestMatch(string lineWidth, Int32 differenceTolerence = 2)
         {
             if (Barcode.widths == null)
             {
@@ -268,7 +266,7 @@ namespace barcodeReader
                 }
                 ++offset;
             }
-            uncertainty = matchFactor;
+            uncertainty += matchFactor;
             return bestMatch;
         }
 
@@ -331,7 +329,7 @@ namespace barcodeReader
         /// </summary>
         /// <param name="barcode">String representing a barcode</param>
         /// <returns>true if checksum is valid</returns>
-        private Boolean ValidateBarCode(string barcode)
+        public static Boolean ValidateBarCode(string barcode)
         {
             Boolean isValid = true;
 

@@ -274,7 +274,7 @@
             // 
             this.nud_lines.Location = new System.Drawing.Point(156, 11);
             this.nud_lines.Maximum = new decimal(new int[] {
-            1000,
+            50,
             0,
             0,
             0});
