@@ -65,7 +65,7 @@ namespace barcodeReader
         /// <summary>
         /// Last barcode read
         /// </summary>
-        private string lastBarcode = "";
+        private Barcode lastBarcode = null;
 
         private delegate void CaptureImage();
         private CaptureImage cap;
@@ -140,9 +140,10 @@ namespace barcodeReader
 
                     if (curBarCode != null)
                     {
-                        string code = Barcode.DecodeImage(curBarCode);
-                        DisplayBarcode(code);
+                        Barcode code = new Barcode(curBarCode);
+                        DisplayBarcode(code.barcode);
                         lastBarcode = code;
+                        lb_confidence.Text = code.confidence.ToString();
                         stop();
                     }
                 }
@@ -232,9 +233,9 @@ namespace barcodeReader
                 return;
             }
             webSource = cb_source.SelectedIndex;
-            if (lastBarcode != "")
+            if (lastBarcode != null)
             {
-                DisplayBarcode(lastBarcode);
+                DisplayBarcode(lastBarcode.barcode);
             }
         }
 
