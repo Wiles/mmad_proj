@@ -26,7 +26,6 @@ namespace barcodeReader
     {
         public static byte threshold = 128;
         public static Int32 rowsToAverage = 50;
-        private static Int32 maxRowsToAverage = 50;
         private static string[] widths = null;
 
         public string barcode = "";
@@ -44,6 +43,10 @@ namespace barcodeReader
         /// <exception cref="BarcodeException">No valid barcode found in image.</exception>
         public Barcode(Bitmap image)
         {
+            if (image.Height < Barcode.rowsToAverage)
+            {
+                throw new BarcodeException("Image to short.");
+            }
             DecodeImage(image);
             this.originalImage = (Bitmap)Bitmapper.Copy(image);
         }
@@ -73,12 +76,6 @@ namespace barcodeReader
         /// <returns>barcode</returns>
         private void DecodeImage(Bitmap Image)
         {
-            // Read multiple rows of the barcode
-            if (rowsToAverage > maxRowsToAverage)
-            {
-                rowsToAverage = maxRowsToAverage;
-            }
-
             this.barcode = "";
 
             Bitmapper.ThresholdImage(Image, threshold);
@@ -170,26 +167,6 @@ namespace barcodeReader
         private void DecodeThicknesses( Double[] lines )
         {
             Boolean valid = true;
-            if( lines.Length != 59 )
-            {
-                throw new BarcodeException("Must have 30 bars");
-            }
-
-            //Check start
-            if (lines[0] != 1 || lines[1] != 1 || lines[2] != 1)
-            {
-                throw new BarcodeException("Start sequence incorrect");
-            }
-            //Check End
-            if (lines[56] != 1 || lines[57] != 1 || lines[58] != 1)
-            {
-                throw new BarcodeException("End sequence incorrect");
-            }
-            //Check middle
-            if (lines[27] != 1 || lines[28] != 1 || lines[29] != 1 || lines[30] != 1 || lines[31] != 1)
-            {
-                throw new BarcodeException("Middle sequence incorrect");
-            }
 
             //remove checks
             Double[] numbers = new Double[48];
@@ -282,9 +259,8 @@ namespace barcodeReader
         /// <param name="row">Which line to return</param>
         /// <returns>the read line</returns>
         private Int32[] ReadLine( Bitmap image, Int32 row )
-        {            
-            Int32 eighthWidth = image.Width / 8;
-            Int32[] rowRead = new Int32[eighthWidth * 6];
+        {
+            Int32[] rowRead = new Int32[image.Width];
 
             //TODO: get this working!
 #if false
@@ -322,9 +298,9 @@ namespace barcodeReader
 #endif // false
             
             //TODO make this use other way
-            for (int i = eighthWidth; i < eighthWidth * 7; ++i)
+            for (int i = 0; i < image.Width; ++i)
             {
-                rowRead[i - eighthWidth] = image.GetPixel(i, row).G;
+                rowRead[i] = image.GetPixel(i, row).G;
             }
             return rowRead;
             

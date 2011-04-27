@@ -171,5 +171,21 @@ namespace barcodeReader
             //return the image
             return (Image)bmp;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bitmap"></param>
+        /// <param name="cropX"></param>
+        /// <param name="cropY"></param>
+        /// <param name="cropWidth"></param>
+        /// <param name="cropHeight"></param>
+        /// <returns></returns>
+        public static Bitmap Crop(Bitmap bitmap, int cropX, int cropY, int cropWidth, int cropHeight)
+        {
+            Rectangle rect = new Rectangle(cropX, cropY, cropWidth, cropHeight);
+            Bitmap cropped = bitmap.Clone(rect, bitmap.PixelFormat);
+            return cropped;
+        }
     }
 }
