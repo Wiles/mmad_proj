@@ -169,13 +169,13 @@ namespace barcodeReader
             Boolean valid = true;
             if( lines.Length != 59 )
             {
-                uncertainty += 2;
+                throw new BarcodeException("Must have 30 bars");
             }
 
             //Check start
             if (lines[0] != 1 || lines[1] != 1 || lines[2] != 1)
             {
-                uncertainty += 1;
+                uncertainty += 2;
             }
             //Check End
             if (lines[56] != 1 || lines[57] != 1 || lines[58] != 1)
@@ -185,7 +185,7 @@ namespace barcodeReader
             //Check middle
             if (lines[27] != 1 || lines[28] != 1 || lines[29] != 1 || lines[30] != 1 || lines[31] != 1)
             {
-                throw new BarcodeException("Middle sequence incorrect");
+                uncertainty += 1;
             }
 
             //remove checks
