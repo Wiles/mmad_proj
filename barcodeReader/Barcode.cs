@@ -30,7 +30,7 @@ namespace barcodeReader
         private static string[] widths = null;
 
         public string barcode = "";
-        public Int32 confidence = 0;
+        public Int32 uncertainty = 0;
         private Bitmap originalImage = null;
         public Bitmap Image
         {
@@ -202,27 +202,27 @@ namespace barcodeReader
                 string lineWidth = numbers[i].ToString() + numbers[i + 1].ToString() + numbers[i + 2].ToString() + numbers[i + 3].ToString();
 
                 char nextNumber;
-                Int32 numberConfidence;
+                Int32 numberUncertainty;
 
                 if (i == 11)
                 {
                     //Checksum must be exact
-                    nextNumber = findBestMatch(lineWidth, out numberConfidence, 0);
+                    nextNumber = findBestMatch(lineWidth, out numberUncertainty, 0);
                 }
                 else
                 {
-                    nextNumber = findBestMatch(lineWidth, out numberConfidence);
+                    nextNumber = findBestMatch(lineWidth, out numberUncertainty);
                 }
                 if( nextNumber == '_' )
                 {
                     valid = false;
                 }
-                this.confidence += numberConfidence;
+                this.uncertainty += numberUncertainty;
                 this.barcode += nextNumber;
             }
             if (valid == false)
             {
-                throw new BarcodeException(barcode);
+                throw new BarcodeException("Unreadable number(s): " + barcode);
             }
         }
 
@@ -230,10 +230,10 @@ namespace barcodeReader
         /// Takes a string representing a set of bar width and tries to find a matching barcode number
         /// </summary>
         /// <param name="lineWidths">Bar thicknesses</param>
-        /// <param name="confidence">Output parameter, how much it trues it's choise. Lower is better.</param>
+        /// <param name="uncertainty">Output parameter, how much it trues it's choise. Lower is better.</param>
         /// <param name="differenceTolerence">How close the line widths have to match the stored examples</param>
         /// <returns>barcode</returns>
-        private char findBestMatch(string lineWidth, out Int32 confidence, Int32 differenceTolerence = 2)
+        private char findBestMatch(string lineWidth, out Int32 uncertainty, Int32 differenceTolerence = 2)
         {
             if (Barcode.widths == null)
             {
@@ -271,7 +271,7 @@ namespace barcodeReader
                 }
                 ++offset;
             }
-            confidence = matchFactor;
+            uncertainty = matchFactor;
             return bestMatch;
         }
 
