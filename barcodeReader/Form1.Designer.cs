@@ -51,6 +51,8 @@
             this.nud_lines = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.lb_confidence = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nud_confidence = new System.Windows.Forms.NumericUpDown();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -60,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_lines)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_confidence)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_image
@@ -294,7 +297,7 @@
             // 
             this.label6.AccessibleDescription = "Lower is better";
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(217, 17);
+            this.label6.Location = new System.Drawing.Point(216, 42);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 13);
             this.label6.TabIndex = 17;
@@ -303,17 +306,41 @@
             // lb_confidence
             // 
             this.lb_confidence.AutoSize = true;
-            this.lb_confidence.Location = new System.Drawing.Point(287, 17);
+            this.lb_confidence.Location = new System.Drawing.Point(286, 42);
             this.lb_confidence.Name = "lb_confidence";
             this.lb_confidence.Size = new System.Drawing.Size(13, 13);
             this.lb_confidence.TabIndex = 18;
             this.lb_confidence.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AccessibleDescription = "Lower is better";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(222, 17);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Min. Conf.:";
+            // 
+            // nud_confidence
+            // 
+            this.nud_confidence.Location = new System.Drawing.Point(289, 16);
+            this.nud_confidence.Name = "nud_confidence";
+            this.nud_confidence.Size = new System.Drawing.Size(55, 20);
+            this.nud_confidence.TabIndex = 20;
+            this.nud_confidence.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 529);
+            this.Controls.Add(this.nud_confidence);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.lb_confidence);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.nud_lines);
@@ -344,6 +371,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_thres)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nud_lines)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_confidence)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,6 +402,8 @@
         private System.Windows.Forms.NumericUpDown nud_lines;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lb_confidence;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown nud_confidence;
     }
 }
 

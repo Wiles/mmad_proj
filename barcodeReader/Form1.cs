@@ -141,6 +141,12 @@ namespace barcodeReader
                     if (curBarCode != null)
                     {
                         Barcode code = new Barcode(curBarCode);
+
+                        if (code.confidence > (Int32)nud_confidence.Value)
+                        {
+                            throw new BarcodeException("Confidence to low:" + code.confidence);
+                        }
+
                         DisplayBarcode(code.barcode);
                         lastBarcode = code;
                         lb_confidence.Text = code.confidence.ToString();
