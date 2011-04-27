@@ -49,6 +49,8 @@
             this.btn_vid_reload = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.nud_lines = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lb_confidence = new System.Windows.Forms.Label();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -213,7 +215,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(233, 41);
+            this.label3.Location = new System.Drawing.Point(398, 43);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 10;
@@ -222,7 +224,7 @@
             // cb_source
             // 
             this.cb_source.FormattingEnabled = true;
-            this.cb_source.Location = new System.Drawing.Point(267, 38);
+            this.cb_source.Location = new System.Drawing.Point(432, 40);
             this.cb_source.Name = "cb_source";
             this.cb_source.Size = new System.Drawing.Size(185, 21);
             this.cb_source.TabIndex = 11;
@@ -231,7 +233,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(217, 18);
+            this.label4.Location = new System.Drawing.Point(382, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 12;
@@ -240,7 +242,7 @@
             // cb_vidcap
             // 
             this.cb_vidcap.FormattingEnabled = true;
-            this.cb_vidcap.Location = new System.Drawing.Point(267, 11);
+            this.cb_vidcap.Location = new System.Drawing.Point(432, 13);
             this.cb_vidcap.Name = "cb_vidcap";
             this.cb_vidcap.Size = new System.Drawing.Size(185, 21);
             this.cb_vidcap.TabIndex = 13;
@@ -248,7 +250,7 @@
             // 
             // btn_vid_reload
             // 
-            this.btn_vid_reload.Location = new System.Drawing.Point(459, 12);
+            this.btn_vid_reload.Location = new System.Drawing.Point(624, 14);
             this.btn_vid_reload.Name = "btn_vid_reload";
             this.btn_vid_reload.Size = new System.Drawing.Size(75, 23);
             this.btn_vid_reload.TabIndex = 14;
@@ -288,11 +290,32 @@
             0});
             this.nud_lines.ValueChanged += new System.EventHandler(this.nud_lines_ValueChanged);
             // 
+            // label6
+            // 
+            this.label6.AccessibleDescription = "Lower is better";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(217, 17);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(64, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Confidence:";
+            // 
+            // lb_confidence
+            // 
+            this.lb_confidence.AutoSize = true;
+            this.lb_confidence.Location = new System.Drawing.Point(287, 17);
+            this.lb_confidence.Name = "lb_confidence";
+            this.lb_confidence.Size = new System.Drawing.Size(13, 13);
+            this.lb_confidence.TabIndex = 18;
+            this.lb_confidence.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 529);
+            this.Controls.Add(this.lb_confidence);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.nud_lines);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btn_vid_reload);
@@ -349,6 +372,8 @@
         private System.Windows.Forms.Button btn_vid_reload;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown nud_lines;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lb_confidence;
     }
 }
 

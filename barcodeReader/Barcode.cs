@@ -26,28 +26,36 @@ namespace barcodeReader
     {
         public static byte threshold = 128;
         public static Int32 rowsToAverage = 50;
+        private static Int32 maxRowsToAverage = 50;
         private static string[] widths = null;
 
+        public string barcode = "";
+        public Int32 confidence = 0;
+
+        public Barcode(Bitmap image)
+        {
+            DecodeImage(image);
+        }
         /// <summary>
         /// Attempts to read a barcode out of an image
         /// </summary>
         /// <param name="Image">Image to read</param>
         /// <returns>barcode</returns>
-        public static string DecodeImage(Bitmap Image)
+        private void DecodeImage(Bitmap Image)
         {
-            string barcode = "";
+            // Read multiple rows of the barcode
+            if (rowsToAverage > maxRowsToAverage)
+            {
+                rowsToAverage = maxRowsToAverage;
+            }
+
+            this.barcode = "";
 
             Bitmapper.ThresholdImage(Image, threshold);
 
             Double[] lineWidth = new Double[59];
 
             Int32 startRow = (Image.Height / 2) - (rowsToAverage / 2);
-
-            // Read multiple rows of the barcode
-            if (rowsToAverage > Image.Height)
-            {
-                rowsToAverage = Image.Height;
-            }
 
             for (int i = 0; i < rowsToAverage; ++i )
             {
@@ -116,13 +124,12 @@ namespace barcodeReader
                 }
             }
 
-            barcode = DecodeThicknesses(lineWidth);
+            DecodeThicknesses(lineWidth);
 
             if (ValidateBarCode(barcode) == false)
             {
                 throw new BarcodeException("Checksum fail: " + barcode);
             }
-            return barcode;
         }
 
         /// <summary>
@@ -130,7 +137,7 @@ namespace barcodeReader
         /// </summary>
         /// <param name="lines">array of thicknesses</param>
         /// <returns>barcode</returns>
-        private static string DecodeThicknesses( Double[] lines )
+        private void DecodeThicknesses( Double[] lines )
         {
             Boolean valid = true;
             if( lines.Length != 59 )
@@ -160,36 +167,36 @@ namespace barcodeReader
             Array.Copy(lines, 32, numbers, 24, 24);
 
             // Decode the barcode through the bar widths
-            string barcode = "";
             for (int i = 0; i < numbers.Length; i += 4)
             {
                 string lineWidth = numbers[i].ToString() + numbers[i + 1].ToString() + numbers[i + 2].ToString() + numbers[i + 3].ToString();
 
                 char nextNumber;
+                Int32 numberConfidence;
 
                 if (i == 11)
                 {
                     //Checksum must be exact
-                    nextNumber = findBestMatch(lineWidth, 0);
+                    nextNumber = findBestMatch(lineWidth, out numberConfidence, 0);
                 }
                 else
                 {
-                    nextNumber = findBestMatch(lineWidth);
+                    nextNumber = findBestMatch(lineWidth, out numberConfidence);
                 }
                 if( nextNumber == '_' )
                 {
                     valid = false;
                 }
-                barcode += findBestMatch(lineWidth);
+                this.confidence += numberConfidence;
+                this.barcode += nextNumber;
             }
             if (valid == false)
             {
                 throw new BarcodeException(barcode);
             }
-            return barcode;
         }
 
-        private static char findBestMatch(string lineWidth, Int32 differenceTolerence = 2)
+        private char findBestMatch(string lineWidth, out Int32 confidence, Int32 differenceTolerence = 2)
         {
             if (Barcode.widths == null)
             {
@@ -210,10 +217,11 @@ namespace barcodeReader
             char bestMatch = '_';
             Int32 matchFactor = Int32.MaxValue;
             Int32 offset = 0;
+            Int32 difference = 0;
+
             foreach(string width in widths)
             {
-                Int32 difference = 0;
-
+                difference = 0;
                 for (int i = 0; i < width.Length; ++i)
                 {
                     difference += Math.Abs(lineWidth[i] - width[i]);
@@ -226,6 +234,7 @@ namespace barcodeReader
                 }
                 ++offset;
             }
+            confidence = matchFactor;
             return bestMatch;
         }
 
@@ -235,7 +244,7 @@ namespace barcodeReader
         /// <param name="image">The image to read line from</param>
         /// <param name="row">Which line to return</param>
         /// <returns>the read line</returns>
-        private static Int32[] ReadLine( Bitmap image, Int32 row )
+        private Int32[] ReadLine( Bitmap image, Int32 row )
         {            
             Int32 eighthWidth = image.Width / 8;
             Int32[] rowRead = new Int32[eighthWidth * 6];
@@ -289,7 +298,7 @@ namespace barcodeReader
         /// </summary>
         /// <param name="barcode">String representing a barcode</param>
         /// <returns>true if checksum is valid</returns>
-        private static Boolean ValidateBarCode(string barcode)
+        private Boolean ValidateBarCode(string barcode)
         {
             Boolean isValid = true;
 
