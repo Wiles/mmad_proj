@@ -76,6 +76,7 @@ namespace barcodeReader
         public Form1()
         {
             InitializeComponent();
+            pb_threshold.SizeMode = PictureBoxSizeMode.CenterImage;
             mu = new Mutex();
             cap = new CaptureImage(imgCap);
             nud_thres.Value = Barcode.threshold;
@@ -134,8 +135,10 @@ namespace barcodeReader
                 {
                     Bitmap curBarCode = (Bitmap)cam.AcquireImage();
                     pb_barcode.Image = Bitmapper.Resize(curBarCode, pb_barcode.Width, pb_barcode.Height);
-                    Bitmap temp = new Bitmap(pb_barcode.Image);
+                    curBarCode = PrepImage(curBarCode);
+                    Bitmap temp = new Bitmap(curBarCode);
                     Bitmapper.ThresholdImage(temp, Barcode.threshold);
+                    temp = (Bitmap)Bitmapper.Resize(temp, pb_barcode.Width, temp.Height);
                     pb_threshold.Image = temp;
 
                     if (curBarCode != null)
@@ -288,6 +291,12 @@ namespace barcodeReader
         private void nud_lines_ValueChanged(object sender, EventArgs e)
         {
             Barcode.rowsToAverage = (Int32)nud_lines.Value;
+        }
+
+        private Bitmap PrepImage(Bitmap image)
+        {
+            Int32 eigthWidth = image.Width/8;
+            return Bitmapper.Crop(image,eigthWidth, (image.Height/2)-(Barcode.rowsToAverage/2), image.Width - eigthWidth, Barcode.rowsToAverage);
         }
     }
 }
