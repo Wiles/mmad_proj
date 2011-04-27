@@ -167,6 +167,26 @@ namespace barcodeReader
         private void DecodeThicknesses( Double[] lines )
         {
             Boolean valid = true;
+            if( lines.Length != 59 )
+            {
+                uncertainty += 2;
+            }
+
+            //Check start
+            if (lines[0] != 1 || lines[1] != 1 || lines[2] != 1)
+            {
+                uncertainty += 1;
+            }
+            //Check End
+            if (lines[56] != 1 || lines[57] != 1 || lines[58] != 1)
+            {
+                uncertainty += 1;
+            }
+            //Check middle
+            if (lines[27] != 1 || lines[28] != 1 || lines[29] != 1 || lines[30] != 1 || lines[31] != 1)
+            {
+                throw new BarcodeException("Middle sequence incorrect");
+            }
 
             //remove checks
             Double[] numbers = new Double[48];
