@@ -31,11 +31,41 @@ namespace barcodeReader
 
         public string barcode = "";
         public Int32 confidence = 0;
+        private Bitmap originalImage = null;
+        public Bitmap Image
+        {
+            get{return this.originalImage;}
+        }
 
+        /// <summary>
+        /// Attempts to create a barcode out of an image
+        /// </summary>
+        /// <param name="Image">Image to read</param>
+        /// <exception cref="BarcodeException">No valid barcode found in image.</exception>
         public Barcode(Bitmap image)
         {
             DecodeImage(image);
+            this.originalImage = (Bitmap)Bitmapper.Copy(image);
         }
+
+        /// <summary>
+        /// Attempts to create a barcode out of a string
+        /// </summary>
+        /// <param name="barcode">String to interpet as barcode</param>
+        /// <exception cref="BarcodeException">No valid barcode found in string.</exception>
+        public Barcode(String barcode)
+        {
+            if (ValidateBarCode(barcode))
+            {
+                this.barcode = barcode;
+            }
+            else
+            {
+                throw new BarcodeException("Checksum fail: " + barcode);
+            }
+        }
+
+        
         /// <summary>
         /// Attempts to read a barcode out of an image
         /// </summary>
@@ -196,6 +226,13 @@ namespace barcodeReader
             }
         }
 
+        /// <summary>
+        /// Takes a string representing a set of bar width and tries to find a matching barcode number
+        /// </summary>
+        /// <param name="lineWidths">Bar thicknesses</param>
+        /// <param name="confidence">Output parameter, how much it trues it's choise. Lower is better.</param>
+        /// <param name="differenceTolerence">How close the line widths have to match the stored examples</param>
+        /// <returns>barcode</returns>
         private char findBestMatch(string lineWidth, out Int32 confidence, Int32 differenceTolerence = 2)
         {
             if (Barcode.widths == null)
