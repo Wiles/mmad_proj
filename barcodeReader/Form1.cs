@@ -142,14 +142,14 @@ namespace barcodeReader
                     {
                         Barcode code = new Barcode(curBarCode);
 
-                        if (code.confidence > (Int32)nud_confidence.Value)
+                        if (code.uncertainty > (Int32)nud_uncertainty.Value)
                         {
-                            throw new BarcodeException("Confidence to low:" + code.confidence);
+                            throw new BarcodeException("Uncertainty to low:" + code.uncertainty);
                         }
 
                         DisplayBarcode(code.barcode);
                         lastBarcode = code;
-                        lb_confidence.Text = code.confidence.ToString();
+                        lb_uncertainty.Text = code.uncertainty.ToString();
                         stop();
                     }
                 }
