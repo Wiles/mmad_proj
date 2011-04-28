@@ -147,7 +147,7 @@ namespace barcodeReader
 
                         if (code.uncertainty > (Int32)nud_uncertainty.Value)
                         {
-                            throw new BarcodeException("Uncertainty to low:" + code.uncertainty);
+                            throw new BarcodeException("Uncertainty to high:" + code.uncertainty);
                         }
 
                         DisplayBarcode(code.barcode);
@@ -295,8 +295,9 @@ namespace barcodeReader
 
         private Bitmap PrepImage(Bitmap image)
         {
-            Int32 eigthWidth = image.Width/8;
-            return Bitmapper.Crop(image,eigthWidth, (image.Height/2)-(Barcode.rowsToAverage/2), image.Width - eigthWidth, Barcode.rowsToAverage);
+            float useWidthPercent = (float)nud_width.Value % 101;
+            Int32 useWidth = (Int32)((float)image.Width * (useWidthPercent / 100));
+            return Bitmapper.Crop(image,(image.Width - useWidth)/2, (image.Height/2)-(Barcode.rowsToAverage/2), useWidth, Barcode.rowsToAverage);
         }
     }
 }

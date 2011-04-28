@@ -53,6 +53,8 @@
             this.lb_uncertainty = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.nud_uncertainty = new System.Windows.Forms.NumericUpDown();
+            this.nud_width = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.gb_image.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -63,6 +65,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_lines)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_uncertainty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_width)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_image
@@ -145,7 +148,7 @@
             // tb_errors
             // 
             this.tb_errors.AutoSize = true;
-            this.tb_errors.Location = new System.Drawing.Point(154, 68);
+            this.tb_errors.Location = new System.Drawing.Point(299, 68);
             this.tb_errors.Name = "tb_errors";
             this.tb_errors.Size = new System.Drawing.Size(33, 13);
             this.tb_errors.TabIndex = 4;
@@ -164,7 +167,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(93, 42);
+            this.label1.Location = new System.Drawing.Point(93, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 6;
@@ -172,7 +175,7 @@
             // 
             // nud_thres
             // 
-            this.nud_thres.Location = new System.Drawing.Point(156, 40);
+            this.nud_thres.Location = new System.Drawing.Point(156, 66);
             this.nud_thres.Maximum = new decimal(new int[] {
             255,
             0,
@@ -196,7 +199,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(93, 68);
+            this.label2.Location = new System.Drawing.Point(238, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 8;
@@ -334,11 +337,39 @@
             0,
             0});
             // 
+            // nud_width
+            // 
+            this.nud_width.Location = new System.Drawing.Point(156, 40);
+            this.nud_width.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_width.Name = "nud_width";
+            this.nud_width.Size = new System.Drawing.Size(54, 20);
+            this.nud_width.TabIndex = 22;
+            this.nud_width.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(112, 42);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(38, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Width:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 529);
+            this.Controls.Add(this.nud_width);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.nud_uncertainty);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lb_uncertainty);
@@ -372,6 +403,7 @@
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nud_lines)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_uncertainty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_width)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -404,6 +436,8 @@
         private System.Windows.Forms.Label lb_uncertainty;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown nud_uncertainty;
+        private System.Windows.Forms.NumericUpDown nud_width;
+        private System.Windows.Forms.Label label8;
     }
 }
 
